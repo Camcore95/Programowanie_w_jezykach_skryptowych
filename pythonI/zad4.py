@@ -1,5 +1,5 @@
 exisitingCode = 4328
-enteredCode = int(input("Dej koda "))
+enteredCode = int(input("Enter the code "))
 if enteredCode == exisitingCode:
     print("OK")
     exit()
