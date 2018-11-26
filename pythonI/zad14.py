@@ -4,7 +4,7 @@ import copy
 
 
 def generate_matrix(size):
-    res = [[random.randrange(5) for i in range(size)] for j in range(size)]
+    res = [[random.randrange(5) for _ in range(size)] for _ in range(size)]
     return res
 
 

@@ -1,9 +1,9 @@
 import random
 
-matrix1 = [[random.randrange(100) for i in range(128)] for j in range(128)]
-matrix2 = [[random.randrange(100) for i in range(128)] for j in range(128)]
+matrix1 = [[random.randrange(100) for _ in range(128)] for _ in range(128)]
+matrix2 = [[random.randrange(100) for _ in range(128)] for _ in range(128)]
 
-result = [[0 for i in range(128)] for j in range(128)]
+result = [[0 for _ in range(128)] for _ in range(128)]
 
 
 def print_matrix(matrix):

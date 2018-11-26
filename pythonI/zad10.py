@@ -4,7 +4,7 @@ import codecs
 inFile = "/home/ute/labybash/pythonI/Kursc.txt"
 outFile = "/home/ute/labybash/pythonI/Kursc_po_zam.txt"
 
-#I use additional word bla to avoid changing i to oraz ant then all oraz to i
+#I use additional word 'bla' to avoid changing 'i' to 'oraz' and then all 'oraz' to 'i'
 replace_list = {" i ": " bla ", " oraz": " i", "nigdy": "prawie nigdy", "dlaczego": "czemu", " bla ": " oraz "}
 textIn = codecs.open(inFile, "r", "windows-1250")
 textOut = codecs.open(outFile, "w+", "windows-1250")

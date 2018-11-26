@@ -2,9 +2,9 @@ import random
 
 size = 8
 
-matrix1 = [[random.randrange(100) for i in range(size)] for j in range(size)]
-matrix2 = [[random.randrange(100) for i in range(size)] for j in range(size)]
-result = [[0 for i in range(size)] for j in range(size)]
+matrix1 = [[random.randrange(100) for _ in range(size)] for _ in range(size)]
+matrix2 = [[random.randrange(100) for _ in range(size)] for _ in range(size)]
+result = [[0 for i in range(size)] for _ in range(size)]
 
 
 for i in range(size):
