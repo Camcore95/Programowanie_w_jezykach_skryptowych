@@ -1,46 +1,28 @@
 import xml.sax
+import xml.sax.saxutils
 
 
-class StudentHandler(xml.sax.ContentHandler):
-    def __init__(self):
-        self.CurrentData = ""
-        self.name = ""
-        self.surname = ""
-        self.index = ""
-        self.address = ""
+class StudentHandler(xml.sax.saxutils.XMLGenerator):
+    def __init__(self, handler):
+        xml.sax.saxutils.XMLGenerator.__init__(self, handler)
+        self.currentData = ""
 
-    def startElement(self, tag, attributes):
-        self.CurrentData = tag
-        if tag == "student":
-            print("*****Student*****")
+    def startElement(self, content, attributes):
+        self.currentData = content
+        xml.sax.saxutils.XMLGenerator.startElement(self, content, attributes)
 
-    def endElement(self, tag):
-        if self.CurrentData == "name":
-            print("Name:", self.name)
-        elif self.CurrentData == "surname":
-            print("Surname:", self.surname)
-        elif self.CurrentData == "index":
-            print("Index:", self.index)
-        elif self.CurrentData == "address":
-            print("Address:", self.address)
-        self.CurrentData = ""
+    def endElement(self, content):
+        self.currentData = ""
+        xml.sax.saxutils.XMLGenerator.endElement(self, content)
 
     def characters(self, content):
-        if self.CurrentData == "name":
-            self.name = content
-        elif self.CurrentData == "surname":
-            self.surname = content
-        elif self.CurrentData == "index":
-            self.index = content
-        elif self.CurrentData == "address":
-            self.address = content
+        if self.currentData == "address":
+            xml.sax.saxutils.XMLGenerator.characters(self, "homeless")
+        else:
+            xml.sax.saxutils.XMLGenerator.characters(self, content)
 
-
-parser = xml.sax.make_parser()
-parser.setFeature(xml.sax.handler.feature_namespaces, 0)
-Handler = StudentHandler()
-parser.setContentHandler(Handler)
-parser.parse("note.xml")
-
+filehandler1 = open("note.xml", "r")
+filehandler2 = open("note_mod2.xml", "w")
+xml.sax.parse(filehandler1, StudentHandler(filehandler2))
 
 
