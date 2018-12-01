@@ -1,8 +1,9 @@
 #-*- coding: windows-1250 -*-
 import codecs
+import sys
 
-inFile = "/home/ute/labybash/pythonI/Kursc.txt"
-outFile = "/home/ute/labybash/pythonI/Kursc_po_zam.txt"
+inFile = sys.argv[1]
+outFile = "outfile.txt"
 
 #I use additional word 'bla' to avoid changing 'i' to 'oraz' and then all 'oraz' to 'i'
 replace_list = {" i ": " bla ", " oraz": " i", "nigdy": "prawie nigdy", "dlaczego": "czemu", " bla ": " oraz "}
