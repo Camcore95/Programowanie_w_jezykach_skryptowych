@@ -1,10 +1,11 @@
 #-*- coding: windows-1250 -*-
 import codecs
+import sys
 
-inFile = "/home/ute/labybash/pythonI/Kursc.txt"
-outFile = "/home/ute/labybash/pythonI/Kursc_po_usunieciu.txt"
+inFile = sys.argv[1]
+outFile = "outfile.txt"
 
-delete_list = {"się ", "i ", "oraz", "nigdy", "dlaczego"}
+delete_list = {"siÄ™ ", "i ", "oraz", "nigdy", "dlaczego"}
 textIn = codecs.open(inFile, "r", "windows-1250")
 textOut = codecs.open(outFile, "w+", "windows-1250")
 
