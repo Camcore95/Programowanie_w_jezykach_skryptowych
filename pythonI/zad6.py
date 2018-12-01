@@ -1,5 +1,6 @@
 import os
+import sys
 
-thisFile = "/home/ute/labybash/pythonI/b.jpg"
+thisFile = sys.argv[1]
 base = os.path.splitext(thisFile)[0]
 os.rename(thisFile, base + ".png")
