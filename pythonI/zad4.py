@@ -1,6 +1,6 @@
-exisitingCode = 4328
+properCode = 4328
 enteredCode = int(input("Enter the code "))
-if enteredCode == exisitingCode:
+if enteredCode == properCode:
     print("OK")
     exit()
-print("NOK")
+print("It's not correct code!")
