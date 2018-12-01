@@ -1,0 +1,1969 @@
+1. Wprowadzenie do kursu 
+
+
+S¹ dwa powody, dla których zdecydowa³em siê napisaæ kurs jêzyka C. Pierwszy jest taki, ¿e nie uda³o mi siê znaleŸæ w internecie strony, która zawiera³aby taki kurs w jêzyku polskim. Owszem, mo¿na znaleŸæ kilka tego typu publikacji, ale wszystkie s¹ napisane w jêzyku angielskim. Drugiego powodu, który sk³oni³ mnie do tego kroku nie zdradzê, ale pewna grupa ludzi wie o co chodzi (sorry, ¿e tak wysz³o, ale sami chcieliœcie ;) PrzejdŸmy wreszcie do rzeczy... 
+
+Na wstêpie chcia³bym przedstawiæ za³o¿enia, jakie przyj¹³em odnoœnie Twojej wiedzy i kilka ogólnych informacji dotycz¹cych jêzyka C. 
+
+Jêzyk C, podobnie jak Pascal, jest jêzykiem strukturalnym. Jednak w przeciwieñstwie do Pascala jest on o wiele mniej rygorystyczny w stosunku do programisty, dziêki czemu osoba pisz¹ca program w C ma o wiele wiêksz¹ swobodê dzia³ania. Poza tym jêzyk ten jest bardziej kompaktowy - w jednej linijce programu w C mo¿na zawrzeæ to, co w przypadku Pascala zajê³oby dziesiêæ. Niektórzy uwa¿aj¹ to za wadê, bo powoduje to trudnoœci w póŸniejszym analizowaniu kodu programu, jednak wed³ug mnie jest to ogromna zaleta tego jêzyka. To programista decyduje tu jak ma wygl¹daæ jego program - jeœli chce czysty, przejrzysty kod to pisze dziesiêæ linijek kodu, ale jeœli wygodniej jest mu to samo zawrzeæ w jednej linijce to czemu standard jêzyka mia³by go ograniczaæ ? 
+
+Jednak mimo tego (a mo¿e w³aœnie dlatego) s¹dzê, ¿e jêzyk C nie powinien byæ pierwszym jêzykiem programowania, który siê poznaje. Wed³ug mnie powinno siê zacz¹æ o bardziej "szkoleniowego" jêzyka jakim jest Pascal. Dopiero po zapoznaniu siê z ogólnymi koncepcjami programowania mo¿na myœleæ o rozpoczêciu nauki jêzyka C. Dlatego te¿ nie bêdê w tym kursie t³umaczy³ takich podstawowych pojêæ jak np. zmienna. Zak³adam, ¿e masz ju¿ ogólne pojêcie o programowaniu. Do zrozumienia tego kursu nie bêdzie jednak konieczna znajomoœæ Pascala, mo¿e to byæ dowolny inny jêzyk programowania. Bêdzie to jednak bardzo pomocne, gdy¿ czêsto bêdê podawa³ odpowiedniki danej instrukcji w³aœnie w tym jêzyku. Powinieneœ tak¿e pamiêtaæ, ¿e samo przeczytanie tego kursu nic Ci nie da. Ja przeka¿ê Ci tylko koncepcjê jêzyka, jego s³owa kluczowe oraz przyk³ady ich zastosowania, jednak umiejêtnoœæ praktycznego ich wykorzystania nabêdziesz tylko oraz wy³¹cznie podczas samodzielnego pisania programów w jêzyku C. Tak wiêc pamiêtaj - æwiczyæ, æwiczyæ oraz jeszcze raz æwiczyæ ! 
+
+Do³o¿y³em wszelkich starañ, aby kurs ten w sposób jasny oraz czytelny przedstawia³ zasady pisania w jêzyku C. Jeœli jednak coœ jest nie do koñca zrozumia³e to mo¿esz do mnie napisaæ. Mój email to motzel@panda.bg.univ.gda.pl lub motzel@polbox.com. Preferujê ten pierwszy, jeœli jednak on nie dzia³a (bo na przyk³ad obla³em jakiœ egzamin oraz wyrzucili mnie ze studiów ;) to napisz na drugi. Postaram siê w miarê mo¿liwoœci wyt³umaczyæ dane zagadnienie. Proszê jednak, ¿ebyœ z pytaniami wstrzyma³ siê a¿ do momentu, gdy przeczytasz punkt "Mój pierwszy program". Do tego momentu coœ mo¿e wydawaæ siê niejasne poniewa¿ brak jest odpowiednich przyk³adów, jednak ten pierwszy program powinien rozwiaæ wszelkie w¹tpliwoœci. 
+Mam te¿ proœbê do osób znaj¹cych ju¿ jêzyk C, a czytaj¹cych ten kurs (s¹ tacy ?). Jeœli znaleŸliœcie jakieœ nieœcis³oœci lub te¿ po prostu b³êdy, to proszê o informacjê, abym móg³ to poprawiæ. 
+
+Wszystkie przyk³adowe programy przedstawione w tym kursie by³y kompilowane przy u¿yciu DJGPP (jest to dosowa wersja gcc, znanego z systemów unixowych), jednak powinny kompilowaæ siê bez problemu przy u¿yciu dowolnego innego kompilatora C. Mo¿esz je zsci¹gn¹æ w postaci pliku zip. Zak³adaj¹c, ¿e u¿ywasz tego samego kompilatora, aby skompilowaæ te pliki musisz wydaæ polecenie: 
+gcc nazwa.c -o nazwa.exe
+Po poprawnej kompilacji na dysku zostanie utworzony plik exe, który jest gotowym do uruchomienia programem. 
+
+
+
+
+2. Wprowadzenie do jêzyka C 
+
+
+Program w jêzyku C jest podzielony na bloki zawarte miêdzy nawiasami klamrowymi { oraz } (s¹ to odpowiedniki "begin" oraz "end" z Pascala). Ka¿dy blok mo¿e byæ kompletn¹ funkcj¹, albo po prostu fragmentem kodu w ramach danej funkcji. Funkcja jest to po prostu wydzielona cz¹stka programu, która wykonuje jakieœ zadanie (np. oblicza pole powierzchni prostok¹ta o danych bokach). W ka¿dym programie napisanym w jêzyku C musi znaleŸæ siê funkcja o nazwie "main". Jest to g³ówna programu, od której zaczyna on swój bieg. Najprostszy program w jêzyku C wygl¹da wiêc tak: 
+
+void main(void)
+{
+}
+Pomiñmy na razie s³ówko "void" (przejdziemy do tego w nastêpnym punkcie) oraz przeanalizujmy ten program. Mamy tutaj jedn¹, jedyn¹ funkcjê "main", która w naszym przypadku nie zawiera ¿adnego kodu (czyli nic nie robi). Jak widzimy definicja funkcji sk³ada siê z nag³ówka, który okreœla jej nazwê, parametry wejœciowe oraz rodzaj zwracanej wartoœci (to tak¿e omówimy póŸniej) i z w³aœciwego cia³a funkcji zawartego miêdzy { oraz } . Zapisuj¹c to inaczej definicja funkcji wygl¹da to tak: 
+typ_zwracanej_wartoœci nazwa_funkcji(lista parametrów)
+{
+}
+Analogiczna definicja funkcji w Pascalu wygl¹da tak: 
+function nazwa_funkcji(lista parametrów) : typ_zwracanej_wartoœci;
+begin
+end;
+Podobne, prawda ? 
+
+Na uwagê zas³uguje jeszcze fakt, ¿e po nazwie funkcji w jêzyku C nie stawiamy œrednika, tak jak to by³o w Pascalu. Jest to sensowne poniewa¿ œrednik symbolizuje zakoñczenie pewnej logicznej ca³oœci, a tu mamy do czynienia z sytuacj¹ wrêcz przeciwn¹ - od tego miejsca funkcja siê zaczyna, nie koñczy. 
+
+Na zakoñczenie tego punktu powiemy sobie jeszcze o zasadach konstrukcji nazw funkcji (tyczy to siê tak¿e nazw zmiennych, o których bêdzie nastêpny punkt). W jêzyku C ka¿dy identyfikator musi zaczynaæ siê od litery, albo od podkreœlenia dolnego "_". Pozosta³e znaki identyfikatora mog¹ oprócz liter oraz "_" zawieraæ tak¿e cyfry. D³ugoœæ jest ograniczona do 32 znaków (mo¿e byæ wiêksza, ale pozosta³e znaki s¹ po prostu ignorowane). I tutaj wa¿na uwaga: jêzyk C rozró¿nia wielkoœæ liter, tak wiêc "PoleProstokata" oraz "poleprostokata" to dwie ró¿ne nazwy ! Szczególnie musz¹ uwa¿aæ osoby, które pisa³y wczeœniej w jêzyku Pascal (w którym jest brak takiego rozró¿nienia), gdy¿ mo¿e prowadziæ to do trudnych do zlokalizowania b³êdów. 
+
+
+
+
+3. Typy danych 
+
+
+W jêzyku C s¹ cztery podstawowe proste typy danych: znak, liczba ca³kowita, liczba rzeczywista oraz typ bezwartoœciowy. Typy te mo¿na nieco zmodyfikowaæ poprzez dodanie przy deklaracji nastêpuj¹cych s³ów: "signed", aby uzyskaæ liczbê ze znakiem (jest to ustawienie domyœlne); "unsigned", aby uzyskaæ liczbê bez znaku; "short", aby zmniejszyæ wielkoœæ zmiennej (ale zmniejszeniu ulega tak¿e zakres); "long", aby zwiêkszyæ wielkoœæ zmiennej (zwiêkszeniu ulega zakres, ale zmienna zajmuje wiêcej miejsca w pamiêci). 
+
+Poni¿sza tabela zawiera wspomniane typy: 
+
+Nazwa typu
+Typ
+Zakres
+Wielkoœæ (w bajtach)
+Uwagi
+char
+ca³kowity
+-128..127
+1
+
+unsigned char
+ca³kowity
+0..255
+1
+
+int
+ca³kowity
+-2^31..2^31-1
+4
+Na kompilatorach 16 bitowych ma 2 bajty
+unsigned int
+ca³kowity
+0..2^32
+4
+Na kompilatorach 16 bitowych ma 2 bajty
+short int
+ca³kowity
+-32768..32767
+2
+
+unsigned short int
+ca³kowity
+0..65535
+2
+
+long int
+ca³kowity
+-2^31..2^31-1
+4
+
+unsigned long int
+ca³kowity
+0..2^32
+4
+
+float
+rzeczywisty
+6 znaków precyzji
+4
+
+double
+rzeczywisty
+10 znaków precyzji
+8
+
+
+Jak widaæ w przypadku wielkoœæ zmiennej mierzona w bajtach jest wprost proporcjonalna do zakresu danych, jaki mo¿e ona przechowywaæ. Dla zmiennych ca³kowitych zakres ten wynosi od 0 do 2^n (w przypadku liczb bez znaku), lub od -2^n do 2^n-1 (w przypadku liczb ze znakiem), gdzie n to iloœæ _bitów_ na których zapisana jest zmienna. Dla przypomnienia: jeden bajt ma osiem bitów... 
+
+Deklaracja zmiennej wygl¹da tak: 
+
+typ_danych nazwa_zmiennej; (czyli dok³adnie odwrotnie ni¿ w Pascalu, w którym by³o: "nazwa_zmiennej : typ_danych;") 
+
+
+Czyli, jeœli chcemy zadeklarowaæ zmienn¹ znakow¹ o nazwie "znak" to robimy to w ten sposób: 
+
+char znak; 
+
+W tym miejscu muszê tak¿e przedstawiæ jeden z wa¿niejszych operatorów jêzyka C (pozosta³e zostan¹ opisane w nastêpnych punktach). Jest to oczywiœcie operator przypisania "=". Zapewne ju¿ wiesz do czego on s³u¿y, ale dla dope³nienia formalnoœci napiszê, ¿e przypisuje wartoœæ wyra¿enia z lewej strony do zmiennej umiejscowionej po prawej jego stronie. Operator ten to oczywiœcie odpowiednik Pascalowego ":=". Od razu przedstawiê praktyczne jego zastosowanie - zadeklarujemy zmienna tak¹, jak w powy¿szym przyk³adzie oraz przypiszemy jej wartoœæ pocz¹tkow¹: 
+
+char znak='A'; 
+
+Konstrukcja taka nie wystêpuje w Pascalu, gdzie blok deklaracji zmiennych jest wydzielony oraz trzeba do osi¹gniêcia tego samego celu wpisaæ dwie linijki kodu. 
+
+
+Deklaracja zmiennej ca³kowitej o nazwie "dlugosc" (wraz z przypisaniem jej wartoœci pocz¹tkowej) wygl¹da tak: 
+
+unsigned long int dlugosc=5; 
+
+
+Natomiast deklaracja zmiennej rzeczywistej o nazwie "pole" (wraz z przypisaniem jej wartoœci pocz¹tkowej) tak: 
+
+float pole=3.48; 
+
+Jak widzimy w powy¿szym przyk³adzie czêœæ ca³kowit¹ oddzielamy od czêœci u³amkowej przy pomocy kropki, nie przecinka ! 
+
+
+Tutaj wa¿na uwaga. Deklaracja wszystkich zmiennych musi byæ wpisana na logicznego pocz¹tku bloku programu (czyli zaraz za znakiem { , który to taki blok rozpoczyna). Zmienna taka jest lokalna, czyli jest dostêpna tylko wewn¹trz bloku, w którym jest zadeklarowana. 
+
+Do omówienia pozosta³ jeszcze typ bezwartoœciowy - jak siê zapewne domyœlacie, jest to wspomniane w poprzednim punkcie "void". Nie jest to typ danych w œcis³ym tego s³owa znaczeniu poniewa¿ nie mo¿na utworzyæ zmiennej tego typu (mo¿na jednak utworzyæ zmienn¹ typu wskaŸnik na void, ale to omówiê gdzieœ pod koniec tego kursu). S³u¿y on g³ownie do deklaracji, ¿e funkcja nie zwraca lub te¿ nie przyjmuje ¿adnych danych. Czyli przyk³ad z pierwszego punktu: 
+
+void main(void) 
+
+mo¿na przet³umaczyæ jako informacjê dla kompilatora, ¿e chcemy zdefiniowaæ funkcjê o nazwie "main", która nie zwraca ¿adnej wartoœci i nie przyjmuje ¿adnych parametrów. 
+
+Jeœli na razie coœ nie jest jasne to siê nie martw, w nastêpnym punkcie przedstawiê jeszcze podstawowe operatory arytmetyczne oraz wreszcie bêdziemy ju¿ mogli napisaæ swój pierwszy program, w którym poka¿ê praktyczne zastosowanie przestawionych rzeczy. A dobry przyk³ad jest lepszy ni¿ tysi¹c s³ów.... 
+
+
+
+
+4. Operatory arytmetyczne 
+
+
+Jêzyk C jest bardzo bogato wyposa¿ony we wszelkiego rodzaju operatory arytmetyczne. Poznaliœmy ju¿ operator przypisania, przysz³a pora na nastêpne. Przedstawiê to w formie tabeli, która bêdzie tak¿e zawieraæ pascalowy odpowiednik. 
+
+C
+Pascal
+Opis
++
++
+Dodanie dwóch wartoœci
+-
+-
+Odjêcie jednej wartoœci od drugiej
+/
+/ lub div
+Podzielenie jednej wartoœci przez drug¹
+*
+*
+Pomno¿enie jednej wartoœci przez drug¹ (ma tak¿e inne znaczenie, ale o tym póŸniej)
+%
+mod
+Reszta z dzielenia dwóch liczb
+++
+brak
+Zwiêkszenie o 1 (wystêpuj¹ tu dwa ró¿ne przypadki omówione poni¿ej)
+--
+brak
+Zmniejszenie o 1 (tak¿e wystêpuj¹ tu dwa ró¿ne przypadki)
+<<
+shl
+Przesuniêcie bitowe w lewo (omówimy je szczegó³owo poni¿ej)
+>> 
+shr
+Przesuniêcie bitowe w prawo (omówimy je szczegó³owo poni¿ej)
+
+
+
+
+4.1. Mój pierwszy program 
+
+
+Gwoli œcis³oœci pierwszy program mamy ju¿ za sob¹ (zosta³ on przedstawiony we "Wprowadzeniu do jêzyka C"), ale wtedy nic on nie robi³. Teraz napiszemy pierwszy program, który wykonuje jakaœ operacjê. Zanim jednak przejdziemy do napisania (i co najwa¿niejsze przeanalizowania) tego programu muszê wspomnieæ jeszcze o jednej rzeczy, a mianowicie o komentarzach. Komentarz jest tekstem wpisanym do kodu programu, który jest jednak pomijany przy jego analizie przez kompilator. Jak sama nazwa wskazuje, s³u¿y on do skomentowania danego fragmentu kodu tak, aby po powrocie po miesi¹cu do kodu programu wiedzieæ jak to naprawdê dzia³a. W jêzyku C komentarzem jest wszystko, co znajduje siê miêdzy znakami /* oraz */ . Dla przypomnienia - w Pascalu komentarz by³ zawarty miêdzy { oraz } lub {* oraz *) . Trzeba tak¿e wspomnieæ o drugim typie komentarza, a mianowicie // . W tym przypadku komentarzem jest wszystko od tych znaczków, a¿ do koñca linii. Co prawda komentarz tego typu zosta³ dopiero wprowadzony w C++, ale wiêkszoœæ kompilatorów pozwala na jego u¿ycie tak¿e dla programów pisanych w C. Ja tak¿e w przestawionych przyk³adach bêdê czêœciej stosowa³ komentarz tego typu, poniewa¿ uwa¿am, ¿e jest on wygodniejszy. Jeœli jednak Twój kompilator go nie obs³uguje, po prostu zamieñ "// jakiœ tekst" na "/* jakiœ tekst */" oraz program skompiluje siê bez ¿adnych problemów. Dobrze, mo¿emy wreszcie przejœæ do napisania programu. Oto on: 
+
+
+
+
+void main(void)
+{
+  // ------------------------------
+  // Deklaracja u¿ywanych zmiennych
+  // ------------------------------
+  int   a, b, c; // Deklaracja trzech zmiennych typu int (ca³kowita).
+                 // Jak widaæ mo¿emy zadeklarowaæ kilka zmiennych tego samego
+                 // typu w jednej linijce. Wystarczy je rozdzieliæ przecinkiem.
+
+  float r = 5.3; // Deklaracja zmiennej typu float (rzeczywista) wraz z
+                 // przypisaniem wartoœci pocz¹tkowej.
+
+
+  // ---------------------
+  // W³aœciwy kod programu
+  // ---------------------
+  a = 5; b = 3;  // Przypisujemy zmiennym a oraz b wartoœci, odpowiednio, 5 oraz 3.
+                 // Jak widaæ w jednej linijce programu mo¿na wpisaæ kilka
+                 // instrukcji koñcz¹c ka¿da przy pomocy œrednika.
+
+  c = a + b;  // Dodanie zmiennych a i b oraz wpisanie wyniku do zmiennej c.
+              // Zmienna c jest teraz równa 8.
+
+  c = a - b;  // Odjêcie zmiennej b od a oraz wpisanie wyniku do zmiennej c.
+              // Zmienna c jest teraz równa 2.
+
+  c = a * b;  // Pomno¿enie zmiennej a przez b oraz wpisanie wyniku do c.
+              // Zmienna c jest teraz równa 15;
+
+  // --- poni¿sze instrukcje s¹ omówione szczegó³owo w tekœcie kursu ---
+
+  c++;        // Zwiêkszenie zmiennej c o 1. Teraz jest ona równa 16.
+  ++c;        // Zwiêkszenie zmiennej c o 1. Teraz jest ona równa 17.
+
+  --c;        // Zmniejszenie zmiennej c o 1. Teraz jest ona równa 16.
+  c--;        // Zmniejszenie zmiennej c o 1. Teraz jest ona równa 15.
+
+  c = a % b;  // Wpisanie do c reszty z dzielenia a przez b.
+              // Zmienna c jest teraz równa 2.
+
+  r = a / b;  // Podzielenie zmiennej a przez b oraz wpisanie wyniku do r.
+              // Zmienna r jest teraz równa 1.
+
+  r = a;      // Przypisanie wartoœci zmiennej a do zmiennej r. Teraz r jest
+              // równe 5. Jak widaæ mimo ró¿nych typów (a jest ca³kowite,
+              // natomiast r jest rzeczywiste) mo¿na bezproblemowo dokonaæ
+              // takiego przypisania. Zmienna typu ca³kowitego jest konwertowana
+              // na zmienn¹ typu rzeczywistego. Natomiast w Pascalu przy próbie
+              // kompilacji czegoœ takiego zosta³by zg³oszony b³¹d.
+
+  r = r / b;  // Podzielenie zmiennej r przez b. Teraz r jest równe 1.666667
+
+
+  // ---------------------------
+  // tworzymy nowy blok programu
+  // ---------------------------
+  {
+    // --------------------------------------
+    // Deklaracja u¿ywanych w bloku zmiennych
+    // --------------------------------------
+    int x=5; // Deklarujemy lokaln¹ dla tego bloku zmienna typu ca³kowitego.
+             // Zmiennej tej nie mo¿emy wykorzystywaæ poza obrêbem tego bloku,
+             // w takim przypadku kompilator zg³osi b³¹d.
+
+    int r=7; // Tutaj mamy ciekaw¹ rzecz. Deklarujemy wewn¹trz tego bloku
+             // zmienna lokaln¹ o takiej samej nazwie jak zmienna wystêpuj¹ca
+             // w bloku nadrzêdnym, jednak o innym typie (wczeœniej by³ to
+             // float).
+
+
+    // --------------------------------------
+    // Kod bloku
+    // --------------------------------------
+    x += r;  // Dodajemy do zmiennej x wartoœæ zmiennej r. Teraz zmienna x
+             // jest równa 12. Widzimy wiêc, ¿e w przypadku, gdy zmienna
+             // lokalna ma tak¹ sam¹ nazwê jak zmienna wystêpuj¹ca w bloku
+             // nadrzêdnym u¿ywana jest zmienna lokalna.
+
+    x += a;  // Dodajemy do zmiennej x wartoœæ zmiennej a. Teraz zmienna x
+             // jest równa 17.
+             // Jak widzimy wewn¹trz tego bloku mo¿emy u¿ywaæ zmiennych
+             // nale¿¹cych zarówno do tego bloku programu, jak oraz zmiennych
+             // zadeklarowanych w blokach nadrzêdnych (w tym przypadku
+             // zmiennej a)
+  }
+}
+
+
+
+Wpiszmy go w edytorze oraz nazwijmy go "first.c". Teraz ju¿ mo¿emy spróbowaæ go skompilowaæ. W zale¿noœci od kompilatora robi siê to w ró¿ny sposób, wiêc nie bêdê tego omawia³ - przeczytaj w dokumentacji od Twojego kompilatora. Mamy ju¿ wiêc nasz pierwszy program, przejdŸmy do jego analizy. 
+Pierwsza linijka to definicja funkcji main, która nie pobiera, ani nie zwraca ¿adnych parametrów (zosta³o to omówione w punkcie Typy danych). Nastêpnie deklarujemy zmienne, które bêdziemy u¿ywaæ. Jak widaæ na przyk³adzie, mo¿emy zadeklarowaæ od razu kilka zmiennych jeœli s¹ one tego samego typu. Zmiennar jest zadeklarowana wraz z przypisaniem wartoœci pocz¹tkowej. Nastêpnych parê linijek to przyk³ady u¿ycia podstawowych operatorów. Myœlê, ¿e nie trzeba ich szczegó³owo omawiaæ, gdy¿ jest to logiczne. Jednak nastêpne cztery linijki to coœ nowego. Jak widaæ w komentarzu instrukcje c++; oraz ++c; wydaj¹ siê dzia³aæ identycznie. Po co wiêc dwie instrukcje, które robi¹ to samo ? Diabe³ tkwi w szczegó³ach. W przedstawionym przyk³adzie ich dzia³anie jest rzeczywiœcie identyczne jednak obie ró¿ni¹ siê sposobem dzia³ania. Operator ++ u¿yty jako przyrostek to tzw. postinkrementacja, natomiast u¿yty jako przedrostek to tzw. preinkrementacja. Aby pokazaæ ró¿nicê w ich dzia³aniu pos³u¿ê siê przyk³adem.
+Za³ó¿my, ¿e zmienna a zawiera wartoœæ piêæ oraz wykonujemy tak¹ oto instrukcjê: 
+
+c = a++; 
+
+W takim przypadku do zmiennej c zostanie przypisana wartoœæ znajduj¹ca siê w zmiennej a (czyli piêæ) oraz dopiero po tym przypisaniu zmienna a zostanie zwiêkszona o jeden. Czyli w efekcie po wykonaniu tej instrukcji zmienna c bêdzie zawiera³a wartoœæ piêæ, natomiast zmienna a bêdzie równa szeœæ. 
+
+Teraz przy za³o¿eniach takich samych jak powy¿ej wykonujemy tak¹ instrukcjê: 
+
+c = ++a; 
+
+W takim przypadku najpierw zmienna a zostanie zwiêkszona o jeden (czyli teraz bêdzie równa szeœæ) oraz nastêpnie ta wartoœæ bêdzie przypisana do zmiennej c . Czyli w efekcie po wykonaniu tej instrukcji obie zmienne bêd¹ równe szeœæ. 
+
+Analogicznie dzia³a operator -- tylko zamiast zwiêkszania, zmniejsza wartoœæ o jeden. 
+
+Nastêpna linia zawiera operator % . Dziêki niemu mo¿emy uzyskaæ resztê z dzielenia ca³kowitego dwóch liczb. W tym przypadku dzielimy piêæ przez trzy, czyli w wyniku otrzymujemy resztê z dzielenia równ¹ dwa. 
+
+PrzejdŸmy do dalszej analizy programu. Znowu widzimy dziwn¹ rzecz - po wykonaniu: 
+
+r = a / b; 
+
+przy a równym piêæ oraz b równym trzy otrzymujemy w wyniku jeden. Natomiast wykonanie ci¹gu instrukcji: 
+
+r = a; r = r / b; 
+
+powoduje, ¿e otrzymujemy wynik którego oczekiwaliœmy, czyli 1.666667. 
+
+Dlaczego tak siê dzieje ? Otó¿ trzeba zwróciæ uwagê na typy zmiennych, które bior¹ udzia³ w operacji dzielenia. W pierwszym przypadku dzielimy liczbê ca³kowit¹ przez liczbê ca³kowit¹. W takiej sytuacji wynik, który otrzymujemy jest równie¿ ca³kowity oraz jest on wpisywany po konwersji do zmiennej r. A poniewa¿ liczba ca³kowita nie posiada czêœci u³amkowej, wynik tej operacji pokazuje ile razy trzy ca³kowicie mieœci siê w pi¹tce, a reszta z tego dzielenia jest odrzucana. Aby zaradziæ takiej sytuacji mo¿na wykorzystaæ tzw. rzutowanie, ale o tym napiszê w dalszej czêœci. Uwaga dla znaj¹cych Pascala: operacji dzielenia odpowiada tutaj operator div z tego jêzyka. 
+
+Natomiast w drugim przypadku nie ma takiego problemu poniewa¿ zmienna r jest typu rzeczywistego. Tak wiêc dzielimy liczbê rzeczywist¹ (która jest równa 5.0 - zwróæcie uwagê na to zero po kropce) przez trzy oraz w efekcie otrzymujemy wynik, który jest tak¿e rzeczywisty. Dlatego w³aœnie jego czêœæ u³amkowa nie jest tracona oraz wynik jest zgodny z oczekiwanym. Operacji dzielenia w tym przypadku odpowiada Pascalowe / . 
+
+IdŸmy dalej... Jak widzimy deklarujemy tutaj nowy logiczny blok programu. Dla przypomnienia - blokiem jest tekst zawarty miêdzy { oraz } . Ka¿dy blok mo¿e mieæ swoje zmienne, wiêc tutaj tak¿e je deklarujemy - zmienn¹ x typu int i zmienn¹ r tak¿e tego typu. Z oboma zmiennymi wi¹¿¹ siê ciekawe rzeczy. Po pierwsze zmienna zadeklarowana wewn¹trz danego bloku jest dostêpna tylko oraz wy³¹cznie dla tego bloku (oraz wszystkich bloków, które bêd¹ zadeklarowane wewn¹trz niego). Tak wiêc próba u¿ycia zmiennej x po znaku koñcz¹cym blok } , spowoduje, ¿e kompilator zg³osi b³¹d. Po drugie zmienna r by³a tak¿e zadeklarowana w bloku nadrzêdnym ! Tak wiêc, która z nich zostanie u¿yta przy próbie dodania r do x ? OdpowiedŸ brzmi nastêpuj¹co: u¿yta zostanie zmienna zadeklarowana "bli¿ej" miejsca jej u¿ycia. 
+
+Po zadeklarowaniu zmiennych widzimy now¹ konstrukcjê: x += r; Có¿ to takiego ? Otó¿ jest to kompaktowa wersja operatora + . Programiœci to leniwy naród oraz lubi¹ sobie upraszczaæ ¿ycie ;) 
+
+Instrukcja a += b; odpowiada zapisowi a = a + b; Którego z tych dwóch zapisów bêdziesz u¿ywa³ jest to obojêtne, oba dzia³aj¹ w identyczny sposób. Ja preferujê ten drugi - mniej trzeba stukaæ w klawiaturê ;)
+Analogicznie wygl¹da sytuacja w przypadku pozosta³ych przedstawionych operatorów (oprócz oczywiœcie ++ oraz -- , gdy¿ nie mia³oby to wtedy sensu). 
+
+Pozosta³y jeszcze do wyjaœnienia dwa operatory, które nie zosta³y u¿yte w tym przyk³adowym programie. S¹ nimi bliŸniacze << oraz >> . Operator << przesuwa wszystkie bity argumentu w lewo, natomiast >> przesuwa je w prawo. Byæ mo¿e nie wiesz nic o systemie dwójkowym oraz nie rozumiesz co to tak naprawdê znaczy, ale nie martw siê. Jedyne co musisz zapamiêtaæ, to fakt, ¿e przesuniêciu liczby w lewo o jeden bit odpowiada pomno¿enie jej przez dwa, natomiast przesuniêcie w prawo podzieleniu jej przez dwa (ca³kowicie). Poni¿ej poda³em kilka przyk³adów: 
+
+a = a << 1; // pomno¿enie zmiennej a przez 2^1, czyli 2
+a = a << 2; // pomno¿enie zmiennej a przez 2^2, czyli 4 
+a = a << 3; // pomno¿enie zmiennej a przez 2^3, czyli 8
+
+a = a >> 1; // podzielenie zmiennej a przez 2^1, czyli 2
+a = a >> 2; // podzielenie zmiennej a przez 2^2, czyli 4
+Móg³byœ jeszcze zapytaæ - po co stosowaæ przesuniêcia bitowe, skoro mogê u¿yæ zwyk³ego mno¿enia lub dzielenia ? Owszem mo¿esz, z tym, ¿e przesuniêcia bitowe s¹ o wiele szybsze, dziêki czemu mo¿esz zwiêkszyæ szybkoœæ dzia³ania swojego programu. Co prawda nowoczesne kompilatory staraj¹ siê optymalizowaæ Twój kod poprzez zamienienie mno¿enia, czy dzielenia na odpowiednie przesuniêcia bitowe, jednak nie robi¹ tego we wszystkich przypadkach. 
+
+Mamy wiêc ju¿ za sob¹ nasz pierwszy program. Co prawda wyników jego dzia³ania nie widaæ na ekranie, ale mia³ on tylko wyt³umaczyæ zasadê u¿ywania operatorów w jêzyku C. Nastêpny nasz program tak¿e bêdzie mia³ za zadanie zobrazowaæ pewny sposób pisania programu oraz nic nie wyœwietli, ale zaraz po nim napiszemy program, który wyœwietli wreszcie pierwszy tekst. Mam nadziejê, ¿e po przeanalizowaniu naszego pierwszego programu wszystko sta³o siê dla Ciebie bardziej jasne oraz zrozumia³e oraz bêdziesz móg³ przejœæ dalej. Jeœli nie, no có¿, przeczytaj jeszcze raz ten punkt, jeœli to nic nie da to napisz do mnie, lub na grupê dyskusyjn¹ pl.comp.lang.c. S¹ tam ludzie, którzy Ci pomog¹ (o ile zadasz w miarê konkretne pytanie). 
+<BR
+
+
+
+
+5. U¿ycie funkcji 
+
+
+Przyjrzyj siê poni¿szemu programowi - liczy on pole powierzchni prostok¹ta o podanych d³ugoœciach boków. 
+
+
+
+
+void main(void)
+{
+float a, b;    // deklarujemy zmienne przechowuj¹ce boki prostok¹ta
+  float dlugosc; // deklarujemy zmienn¹ zawieraj¹c¹ wynik obliczeñ
+
+  a = 5; b =10;    // przypisujemy im wartoœci
+  dlugosc = a * b; // obliczamy pole prostok¹ta (tu równe 50)
+}
+
+
+
+A co jeœli chcia³byœ obliczyæ tak¿e pole prostok¹ta o innych d³ugoœciach boków ? Odpowiesz pewnie: "Nic prostszego ! Wystarczy skopiowaæ fragment tego programu oraz zmieniæ d³ugoœci boków". Owszem, ale co jeœli chcia³byœ obliczyæ pola stu prostok¹tów ? Albo gdybyœ liczy³ coœ bardziej skomplikowanego, co nie zajê³oby tylko jednej linijki, jak w naszym przypadku, a na przyk³ad trzydzieœci ? Przy u¿yciu tego sposobu program zaj¹³by trzysta linijek ! W³aœnie dlatego w jêzyku C istniej¹ funkcje, które rozwi¹zuj¹ ten problem. Jak zbudowane s¹ funkcje to ju¿ wiesz z poprzednich punktów, ale nie znasz praktycznego ich zastosowania. Poni¿szy program wykonuje t¹ sam¹ operacjê jak ostatni, jednak obliczenia pola prostok¹ta wykonywane jest w funkcji: 
+
+
+
+
+float PoleProstokata(float bok1, float bok2)
+{
+  // w tym miejscu bok1 jest równy 5, 
+  // natomiast b jest równe 10
+
+  float wynik;
+
+  wynik = bok1 * bok2;
+  return wynik;
+}
+
+void main(void)
+{
+  float a, b, dlugosc;
+
+  a = 5; b = 10;
+  dlugosc = PoleProstokata(a, b);
+}
+
+
+
+Jak widzisz, program zawiera dwie funkcje - main , która jest "obowi¹zkowa" w ka¿dym programie i PoleProstok¹ta . Analizuj¹c nag³ówek funkcji PoleProstok¹ta mo¿emy zauwa¿yæ, ¿e zwraca ona wynik obliczeñ w postaci liczby rzeczywistej ( float ) i przyjmuje dwa parametry - bok1 oraz bok2 . W tym przypadku oba parametry s¹ tak¿e typu float , jednak funkcja mo¿e przyjmowaæ dowoln¹ iloœæ argumentów dowolnego typu, wystarczy je wpisaæ w formie "typ_argumentu nazwa" oraz oddzielaæ przecinkami jeden od drugiego. 
+Pojawi³o siê nam tu tak¿e nowe s³owo kluczowe - return . Wykonuj¹c to polecenie program powraca z funkcji do miejsca jej wywo³ania zwracaj¹c wartoœæ podanego argumentu (który jest takiego typu, jak to okreœlono w nag³ówku funkcji). W naszym przypadku po tym poleceniu wystêpuje nazwa zmiennej wynik , tak wiêc wartoœæ zwracana przez t¹ funkcjê jest równa wartoœci tej zmiennej, która z kolei jest obliczana linijkê wy¿ej (iloczyn dwóch podanych argumentów). Zacznijmy jednak analizê programu od miejsca, w którym siê on rozpoczyna, czyli od funkcji main (pamiêtaj, ¿e jest to zawsze pierwsza funkcja wywo³ywana po uruchomieniu programu). 
+Na pocz¹tku mamy znane ju¿ rzeczy - deklaracjê trzech zmiennych oraz przypisanie wartoœci. Ostatnia linijka jest jednak nowoœci¹, do zmiennej d³ugoœæ jest coœ przypisywane. No w³aœnie, co ? Otó¿ jest to wartoœæ zwrócona przez wywo³an¹ funkcjê. Jako parametry dla tej funkcji przekazujemy nasze zmienne a oraz b . Jest to tzw. przekazanie przez wartoœæ, co znaczy, ¿e nie przekazujemy samych zmiennych, a tylko wartoœci, które one zawieraj¹. Wartoœci te s¹ po prostu kopiowane do parametrów bok1 oraz bok2 oraz nawet jeœli w ciele funkcji zmienimy ich wartoœci to zmianie ulegn¹ tylko te lokalne kopie, natomiast po powrocie do funkcji main zmienne a oraz b bêd¹ mia³y star¹ wartoœæ.
+Po wywo³aniu funkcji PoleProstokata przenosimy siê do cia³a tej funkcji. W tym momencie pierwszy parametr funkcji o nazwie bok1 jest równy wartoœci zmiennej a (czyli piêæ), natomiast drugi o nazwie bok2 jest równy wartoœci zmiennej b (czyli dziesiêæ). Pierwsz¹ rzecz¹ jest deklaracja zmiennej wynik - to ju¿ znamy. Nastêpnie, w wyniku pomno¿enia zmiennej bok1 przez bok2 , do zmiennej wynik wpisana jest wartoœæ piêtnaœcie. W³aœnie t¹ wartoœæ zwracamy przy pomocy return do miejsca, w którym funkcja PoleProstokata zosta³a wywo³ana oraz w³aœnie t¹ wartoœæ bêdzie zawiera³a zmienna d³ugosc po wykonaniu ostatniej linijki programu.
+Mam nadziejê, ¿e zrozumia³eœ rzeczy poruszone w tym punkcie, gdy¿ funkcje to podstawa jêzyka C. Na zakoñczenie jednak wspomnê o jeszcze jednej wa¿nej rzeczy dotycz¹cej funkcji, ¿ebyœ móg³ bezboleœnie zrozumieæ nastêpny punkt. Za³ó¿my, ¿e nasz ostatni program zapiszemy w trochê inny sposób, tzn. najpierw zapiszemy funkcjê main , a dopiero pod ni¹ funkcjê PoleProstokata . Czyli wygl¹da³oby to nastêpuj¹co: 
+
+
+
+
+void main(void)
+{
+  float a, b, dlugosc;
+
+  a = 5; b = 10;
+  dlugosc = PoleProstokata(a, b);
+}
+
+float PoleProstokata(float bok1, float bok2)
+{
+  // w tym miejscu bok1 jest równy 5, 
+  // natomiast b jest równe 10
+
+  float wynik;
+
+  wynik = bok1 * bok2;
+  return wynik;
+}
+
+
+
+Jak myœlisz, czy taki program skompiluje siê bez ¿adnego problemu ? Odpowiesz zapewne: "Oczywiœcie, czemu kolejnoœæ zapisu funkcji mia³aby wp³ywaæ na jego poprawnoœæ ?". Masz racjê, jednak tylko czêœciowo. W zale¿noœci od typu u¿ywanego przez Ciebie kompilatora, próba kompilacji tego programu albo zakoñczy siê zupe³nym niepowodzeniem, albo zostan¹ wyœwietlone ostrze¿enia. Dlaczego ? PodejdŸmy do zagadnienia od strony tego, w jaki sposób dzia³a kompilator. Otó¿ analizuje on program, linijka po linijce, sprawdzaj¹c czy jest on poprawny. Tak wiêc sprawdza on pierwsze piêæ linijek programu, a¿ dochodzi do linii, w której mamy wywo³anie funkcji PoleProstokata . I tutaj wyœwietla b³¹d poniewa¿ nie wie co ta nazwa oznacza - ani nie jest to ¿adne ze s³ów kluczowych jêzyka C, ani nie jest to te¿ wczeœniej zadeklarowana zmienna. Sposób zapisu co prawda sugeruje, ¿e jest to jakaœ funkcja, ale sk¹d ma on wiedzieæ jakie parametry powinna ona przyjmowaæ ? Zapytasz zapewne: "Jak to nie wie ? Przecie¿ parê linijek ni¿ej jest ta funkcja zdefiniowana !". W³aœnie - parê linijek ni¿ej. A poniewa¿ kompilator analizuje poprawnoœæ programu zaczynaj¹c od jego pocz¹tku to nie wie, ¿e definicja tej funkcji znajduje siê gdzieœ ni¿ej (albo zupe³nie w innym pliku). Aby zaradziæ tej sytuacji stosuje siê w jêzyku C tzw. prototypy. Jest to po prostu informacja dla kompilatora, ¿e gdzieœ ni¿ej znajdzie funkcjê o podanej nazwie i okreœlonych parametrach. W naszym przypadku chcemy powiadomiæ kompilator o funkcji PoleProstokata . Wystarczy, ¿e dodany na samym pocz¹tku tak¹ oto linijkê: 
+
+float PoleProstokata(float bok1, float bok2); 
+
+Zauwa¿, ¿e jest to dok³adna kopia nag³ówka naszej funkcji zakoñczona œrednikiem. Teraz kompilator sprawdzaj¹c nasz program w pierwszej linijce znajdzie informacjê o tym, ¿e w przypadku napotkania nazwy PoleProstokata jest to funkcja, która przyjmuje dwa parametry typu float oraz zwraca tak¿e float . 
+
+
+
+
+6. Preprocesor po raz pierwszy 
+
+
+W poprzednim punkcie obieca³em, ¿e napiszemy teraz nasz pierwszy program wyœwietlaj¹cy tekst na ekranie. Zastanówmy siê co nam bêdzie potrzebne do realizacji tego zadania ? Poniewa¿ program w jêzyku C zbudowany jest z funkcji to potrzebujemy oczywiœcie odpowiedniej funkcji, która zadanie to wykona. Funkcja taka nazywa siê printf . Jak ka¿e tradycja, pierwszy program powinien wyœwietlaæ napis "Hello world !", nasz nie bêdzie wyj¹tkiem: 
+
+void main(void)
+{
+  printf("Hello world !");
+}
+Spróbuj zapisaæ ten program pod nazw¹ hello.c oraz skompilowaæ. Zapewne kompilator zg³osi³ znany ju¿ Ci b³¹d. Zapewne ju¿ siê domyœlasz czemu. Wystêpuje tu taka sama sytuacja jak w naszym ostatnim programie. Kompilator nie wie co symbolizuje nazwa printf . Czego brakuje ? Oczywiœcie prototypu tej funkcji ! Zanim jednak przejdziesz do wyszukania jej prototypu oraz wpisania go na pocz¹tku programu przedstawiê Ci dyrektywê #include . Pomyœl, funkcji podobnych do printf s¹ setki, jeœli chcia³byœ u¿yæ ich w swoim programie musia³byœ wczeœniej wpisaæ prototyp ka¿dej z nich - jaka to strata czasu ! Dlatego producent Twojego kompilatora zrobi³ to za Ciebie - wpisa³ wszystkie prototypy funkcji do plików z rozszerzeniem .h (od header - nag³ówek), które dostarczy³ razem z kompilatorem. Jednak nie bój siê, nie musisz tak¿e pracowicie u¿ywaæ kombinacji "kopiuj oraz wklej" Twojego edytora - standard jêzyka C udostêpnia wspomnian¹ ju¿ wczeœniej dyrektywê #include , która pozwala zautomatyzowaæ t¹ operacjê. Jej u¿ycie wygl¹da tak, ¿e na pocz¹tku programu nale¿y wpisaæ: 
+#include <stdio.h>
+W nawiasach nale¿y podaæ nazwê pliku, który kompilator ma sobie do³¹czyæ podczas kompilacji programu. W naszym przypadku jest to stdio.h (skrót od standard input/output - standardowe wejœcie/wyjœcie), w którym to w³aœnie pliku znajduje siê prototyp funkcji "printf". Zauwa¿ tak¿e, ¿e linijka ta nie jest zakoñczona œrednikiem. Dodaj teraz podan¹ liniê do programu, skompiluj go oraz uruchom. Pe³en sukces, na ekranie pojawi³ siê napis !
+Na zakoñczenie omawiania tej dyrektywy mam dla Ciebie jeszcze jedn¹ uwagê odnoœnie fizycznej lokalizacji pliku nag³ówkowego. Sk¹d kompilator ma wiedzieæ, na którym dysku oraz w którym katalogu znajduje siê ten plik ? Otó¿ ka¿dy kompilator ma z góry okreœlony katalog, w którym siê pliki nag³ówkowe znajduj¹. Na ogó³ jest pliki te znajduj¹ siê w katalogu o nazwie include , który z kolei znajduje siê w g³ównym katalogu kompilatora. Jeœli nazwê pliku zawrzesz, tak jak jest przedstawione powy¿ej, wewn¹trz nawiasów to w³aœnie w tym katalogu kompilator bêdzie poszukiwa³ podanego pliku. Jeœli go nie znajdzie to wyœwietli b³¹d. Istnieje tak¿e inny sposób u¿ycia tej dyrektywy, a mianowicie nazwê pliku podaje siê wewn¹trz cudzys³owia, czyli np. tak: 
+#include "mojplik.h"
+Jeœli nazwê pliku okreœlisz w ten sposób to kompilator bêdzie tego pliku szuka³ w aktualnie wybranym katalogu. 
+
+W punkcie tym omówimy jeszcze jedno z zastosowañ innej dyrektywy, a mianowicie "#define". Pozosta³e dyrektywy zostan¹ omówione w dalszej czêœci kursu (w punkcie "Preprocesor po raz drugi"). 
+
+Dziêki dyrektywie #define mo¿na zast¹piæ czêsto u¿ywany ci¹g znaków za pomoc¹ identyfikatora. Poniewa¿ doœæ ciê¿ko jest wyt³umaczyæ sens takiego postêpowania, napiszemy program, który to zilustruje.
+Za³ó¿my, ¿e chcesz napisaæ program licz¹cy pole powierzchni i obwód ko³a o podanym promieniu. Do obu tych operacji bêdziesz potrzebowa³ liczby PI . Czyli dwa razy u¿yjesz w swoim programie sekwencji znaków 3.1415. Bêdzie to wygl¹da³o tak: 
+
+
+
+
+#include &ltstdio.h>
+
+float ObliczPole(float promien);
+float ObliczObwod(float promien);
+
+void main(void)
+{
+  float pole, obwod;
+
+  pole = ObliczPole(5);
+  obwod = ObliczObwod(5);
+}
+
+float ObliczPole(float promien) 
+{
+  // wzór na pole to PI*R^2
+  return (3.1415 * promien * promien);
+}
+
+float ObliczObwod(float promien)
+{
+  // wzór na obwód to 2*PI*R
+  return (2 * 3.1415 * promien);
+}
+
+
+
+Pomyœl teraz, czy nie by³oby wygodniej, gdybyœ zamiast ka¿dorazowego wpisywania wartoœci odpowiadaj¹cej liczbie PI , móg³ wpisaæ po prostu PI ? Jeœli myœlisz, ¿e to ¿aden problem to mam dla Ciebie jeszcze jedno pytanie. A co by³oby, gdybyœ nagle zapragn¹³ zwiêkszyæ precyzjê obliczeñ oraz do okreœlenia liczby PI zamiast czterech, chcia³byœ zastosowaæ piêæ liczb po przecinku ? Musia³byœ w takim przypadku pracowicie przeszukiwaæ kod programu oraz zamieniæ wszelkie wyst¹pienia ci¹gu "3.1415" na "3.14159". Przy du¿ym programie o pomy³kê nietrudno. Wszystkie te problemy mo¿na rozwi¹zaæ w³aœnie przy pomocy dyrektywy #define . Nasz program z zastosowaniem tej dyrektywy wygl¹da³by nastêpuj¹co: 
+
+
+
+
+#include &ltstdio.h>
+
+#define PI 3.1415
+
+float ObliczPole(float promien);
+float ObliczObwod(float promien);
+
+void main(void)
+{
+  float pole, obwod;
+
+  pole = ObliczPole(5);
+  obwod = ObliczObwod(5);
+}
+
+float ObliczPole(float promien)
+{
+  // wzór na pole to PI*R^2
+  return (PI * promien * promien);
+}
+
+float ObliczObwod(float promien)
+{
+  // wzór na obwód to 2*PI*R
+  return (2 * PI * promien);
+}
+
+
+
+
+W trzeciej linijce mamy deklaracjê naszego symbolu o nazwie PI (zauwa¿, ¿e wyra¿enie to nie jest zakoñczone œrednikiem). Teraz kompilator ka¿de wyst¹pienie takiego tekstu w kodzie programu zast¹pi tekstem "3.1415". Jeœli teraz chcielibyœmy zwiêkszyæ precyzjê obliczeñ, wystarczy, ¿e zmienimy tylko t¹ w³aœnie linijkê, a ca³y program bêdzie ju¿ u¿ywa³ tej nowej wartoœci. Prawda, ¿e wygodne ? 
+
+
+
+
+7. Printf oraz wyœwietlanie danych 
+
+
+W poprzednim punkcie napisaliœmy program wyœwietlaj¹cy na ekranie tekst. Dla przypomnienia - skorzystaliœmy z funkcji "printf". Jednak co to za program, który wyœwietla z góry ustalone teksty oraz nie ma mo¿liwoœci zaprezentowania wyników przeprowadzonych operacji ? W tym w³aœnie punkcie zaprzêgniemy wspomnian¹ funkcjê do takiej w³aœnie pracy. Jak zwykle pos³u¿ymy siê przyk³adowym programem. 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  float        f = 0.521;
+  int          oraz = -123;
+  unsigned int u = 24;
+  char         c = 'A';
+
+  printf("Zmienna f = %f, natomiast zmienna oraz jest rowna %d.\n", f, i);
+  printf("Zmienna c = %c, a zmienna u jest rowna %u.\n", c, u);
+  printf("Zmienna u w zapisie szestnastkowym jest rowna %x, \n", u);
+  printf("natomiast w zapisie osemkowym jest rowna %o.", u);
+}
+
+
+
+
+Jak widzimy funkcja "printf" mo¿e tak¿e wyœwietlaæ wartoœci zmiennych. Ogólny jej zapis wygl¹da tak: 
+
+printf(ciag_formatuj¹cy, lista parametrów); 
+
+Ci¹g formatuj¹cy jest zwyk³ym ci¹giem znaków do wyœwietlenia na ekranie. Jednak niektóre znaki maj¹ funkcjê specjaln¹ oraz nie zostan¹ one po prostu wyœwietlone. Takim w³aœnie znakiem jest znak % . Gdy funkcja printf go napotka to wie, ¿e po nim wyst¹pi okreœlenie rodzaju argumentu oraz formatu jego wyœwietlenia na ekranie. Ogólnie wygl¹da to tak: 
+
+% [flagi] [szerokoœæ] [precyzja] [modyfiktor wielkoœci] typ_parametru 
+
+Tylko "typ_parametru" musi wyst¹piæ po znaku % , natomiast parametry podane w nawiasach kwadratowym s¹ opcjonalne oraz mo¿e ich w ogóle nie byæ (tak jest w przedstawionym przyk³adzie). Poni¿ej poda³em najczêœciej stosowane typy parametrów: 
+
+%d
+zmienna typu int (ze znakiem)
+%u
+zmienna typu int (bez znaku)
+%c
+zmienna typu char (litera)
+%f
+zmienna typu float (rzeczywista)
+%x
+zmienna typu int (bez znaku) wyœwietlana w postaci szesnastkowej
+%o
+zmienna typu int (bez znaku) wyœwietlana w postaci ósemkowej
+%s
+ci¹g znaków (zostanie omówiony póŸniej)
+%p
+wskaŸnik (zostanie omówiony póŸniej)
+
+Nie przera¿aj siê jeszcze, po przeanalizowaniu zasady dzia³ania funkcji printf wszystko stanie siê jasne. Zrobimy to na podstawie pierwszej linijki z t¹ funkcj¹ w naszym programie, czyli: 
+
+printf("Zmienna f = %f, natomiast zmienna oraz jest rowna %d.\n", f, i); 
+
+Po wywo³aniu funkcja printf sprawdza znak po znaku ci¹g formatuj¹cy. Ci¹g ten rozpoczyna siê od "Zmienna f = ". Poniewa¿ na razie nie wyst¹pi³ znak % wszystkie te znaki zostan¹ po prostu wyœwietlone na ekranie. Nastêpnie napotyka siê na znak % , którego jednak ju¿ nie wyœwietla, ale sprawdza co stoi za nim. Okazuje siê, ¿e jest to literka "f", czyli razem otrzymuje %f , która to kombinacja oznacza, ¿e w tym miejscu powinna wyœwietliæ liczbê typu rzeczywistego (patrz tabelka powy¿ej). Bierze wiêc pierwszy argument (który jest wypisany po przecinku zaraz za znakiem cudzys³owia koñcz¹cego ci¹g formatuj¹cy), którym w naszym przypadku jest zmienna f oraz wyœwietla jego wartoœæ na ekranie. Nastêpnie przechodzi do dalszego sprawdzania ci¹gu formatuj¹cego. Wyœwietla ci¹g ", natomiast zmienna oraz jest rowna ", poniewa¿ tak¿e nie wystêpuje w nim ¿aden znak kontrolny oraz dochodzi do miejsca, w którym mamy drugi znak % . Tym razem typem parametru jest "d", czyli jest to informacja, ¿e ma wyœwietliæ liczbê ca³kowit¹ (ze znakiem). Tak wiêc funkcja printf pobiera drugi argument, którym w naszym przypadku jest zmienna i, a nastêpnie wyœwietla jej zawartoœæ na ekranie. Po tym, jak ju¿ to zrobi wraca do sprawdzania ci¹gu. Tym razem natyka siê na ".", któr¹ to wyœwietla oraz pobiera nastêpny znak, którym jest \ . Jest to drugi, po % , znak kontrolny. Ci¹g \n daje informacjê dla printf , ¿e w tym miejscu powinna ona przejœæ do nastêpnej linii ekranu. Innymi czêsto u¿ywanymi s¹: 
+
+\t
+tabulacja
+\r
+powrót karetki (kursor przesuwa siê do pocz¹tku linii)
+\b
+backspace (cofniêcie o jeden znak)
+\a
+bell (krótki sygna³ dŸwiêkowy)
+\"
+znak cudzys³owia (zauwa¿, ¿e jakbyœ po prostu go wpisa³ to kompilator potraktowa³by to jako zakoñczenie ci¹gu formatuj¹cego)
+
+Czyli w efekcie, po wykonaniu tej funkcji na ekranie pojawi siê: 
+
+"Zmienna f = 0.521000, natomiast zmienna oraz jest rowna -123." 
+
+Jak widzimy, wartoœæ zmiennej f jest wyœwietlona z dok³adnoœci¹ do szeœciu miejsc po przecinku. Jednak nas mog¹ interesowaæ na przyk³ad jedynie dwa miejsca po przecinku, reszty nie potrzebujemy. Wtedy nale¿y u¿yæ opcjonalnych parametrów, które mog¹ wyst¹piæ po znaku % . Dla przypomnienia ogólny zapis wygl¹da tak: 
+
+% [flagi] [szerokoœæ] [precyzja] [modyfiktor wielkoœci] typ_parametru 
+
+Zaczniemy od omówienia flag: 
+-
+wyrównuje liczbê do lewej (normalnie by³aby wyrównana do prawej)
++
+liczba zawsze zaczyna siê od znaku "+" (dla dodatnich) lub "-" (dla ujemnych), normalnie znak jest wyœwietlany tylko dla liczb ujemnych
+
+Teraz parametr szerokoœæ: 
+n
+gdzie n jest liczb¹ okreœlaj¹c¹ ile znaków zostanie wyœwietlonych. Jeœli n jest wiêksze od szerokoœci liczby to zostanie ona uzupe³niona spacjami. Jeœli jest mniejsze to liczba nie zostanie uciêta.
+0n
+gdzie n jest liczb¹ okreœlaj¹c¹ ile znaków zostanie wyœwietlonych. Jeœli n jest wiêksze od szerokoœci liczby to zostanie ona uzupe³niona zerami. Jeœli jest mniejsze to liczba nie zostanie uciêta.
+
+Teraz parametr precyzja: 
+Parametr ten zawsze zaczyna siê od kropki, a nastêpnie podajemy iloœæ liczb do wyœwietlenia po przecinku (tak jak to by³o przy szerokoœci. 
+
+Pozosta³ jeszcze jeden parametr, a mianowicie modyfikator wielkoœci: 
+l
+okreœla, ¿e parametr jest typu long (np. long int to %ld)
+h
+okreœla, ¿e parametr jest typu short (np. short int to %hd) 
+
+
+Wszystko zosta³o ju¿ omówione, na zakoñczenie podam jeszcze przyk³ady u¿ycia. Wszystkie bêd¹ pokazywa³y to, co zostanie wyœwietlone na ekranie, przy za³o¿eniu, ¿e zmienne maj¹ wartoœci takie jak w naszym przyk³adowym programie. 
+"[%6.3f]"
+wyœwietli siê "[ 0.521]". Pamiêtaj, ¿e liczba szeœæ oznacza szerokoœæ ca³ej liczby, a nie tylko czêœci przed przecinkiem. Poniewa¿ szerokoœæ liczby jest równa piêæ, to zosta³a dodana jedna spacja _przed_ liczb¹. 
+"[%-6.3f]"
+wyœwietli siê "[0.521 ]". Jak wy¿ej, tylko spacja zosta³a dodana _po_ liczbie (wyrównanie do lewej). 
+"[%06.3f]"
+wyœwietli siê "[00.521]". Czyli zamiast spacji, zosta³o dodane zero.
+"[%+6.3f]"
+wyœwietli siê "[+0.521]". Oczywiœcie dla f równego -0.521 wyœwietli siê znak minus, nie plus. 
+
+
+
+
+
+8. Operacje logiczne 
+
+
+O ile w przypadku operacji artymetycznych wynikiem mog³a byæ dowolna liczba (oczywiœcie z okreœlonego zakresu), to wynikiem operacji logicznej jest jeden z dwóch mo¿liwych stanów - prawda lub fa³sz . W jêzyku C za fa³sz uznaje siê liczbê zero, natomiast wszystkie pozosta³e s¹ uznawane za prawdê . Wynikiem takiego traktowania stanów logicznych jest mo¿liwoœæ u¿ywania kompaktowych wersji porównañ logicznych, co zobaczymy w nastêpnej czêœci tego punktu. 
+
+
+
+8.1. Porównania 
+
+
+W tym podpunkcie przedstawiê je tylko, natomiast przyk³ady ich wykorzystania zostan¹ zaprezentowane w nastêpnym podpunkcie. W jêzyku C mamy nastêpuj¹ce operatory porównania: 
+
+C
+Pascal
+Opis
+>
+>
+wiêksze ni¿
+<
+<
+mniejsze ni¿
+>=
+>=
+wiêksze lub równe
+<=
+<=
+mniejsze lub równe
+==
+=
+równe (zwróæ uwagê na podwójny znak równoœci)
+!=
+<>
+nie równe
+
+
+
+8.2. Instrukcja if 
+
+
+Instrukcja ta jest istotnym elementem ka¿dego programu, poniewa¿ pozwala ona na modyfikacjê sposobu, w jaki dzia³a program w zale¿noœci od wartoœci danych. W jêzyku C, podobnie jak w Pascalu, ma ona nastêpuj¹c¹ sk³adniê: 
+
+if(wyra¿enie) wyra¿enie1 else wyra¿enie2 
+
+Jeœli wyra¿enie w nawiasie ma wartoœæ logiczn¹ prawda to zostanie wykonane wyra¿enie1, w przeciwnym wypadku zostanie wykonane wyra¿enie2. Przyk³adowo: 
+
+if( a > 10 ) printf("Zmienna a jest wiêksza od dziesiêciu !"); else printf("Zmienna a jest mniejsza lub równa dziesiêæ !"); 
+
+Zauwa¿, ¿e zarówno wyra¿enie po if , jak oraz wyra¿enie po else jest zakoñczone œrednikiem. Uwagê t¹ kierujê szczególnie do osób znaj¹cych Pascala, w którym œrednik stawia dopiero na samym koñcu. Oczywiœcie, tak jak w Pascalu, czêœci "else" mo¿esz w ogóle nie u¿ywaæ, jeœli nie jest Ci to akurat potrzebne. Czyli mo¿esz napisaæ tak: 
+
+if( a > 10 ) printf("Zmienna a jest wiêksza od dziesiêciu !"); 
+
+Jeœli chcesz wykonaæ kilka instrukcji jeœli spe³niony jest pewien warunek to musisz je zawrzeæ w bloku ograniczonym znakami { oraz } . Czyli wygl¹da³oby to nastêpuj¹co: 
+
+if( a > 10 ) {
+  printf("Zmienna a jest wieksza od dziesiêciu !\n");
+  printf("Jest bowiem równa %d.", a);
+} else {
+  printf("Zmienna a jest mniejsza lub równa dziesiêæ !\n");
+  if(a != 5) printf("Jednak nie jest równa pieæ !");
+}
+Oczywiœcie to, jak sformatujesz ten tekst (np. mo¿esz znak rozpoczynaj¹cy blok wpisañ w nowej linii) zale¿y tylko od Ciebie. Ja jednak preferujê taki sposób, wed³ug mnie jest to bardziej czytelne. 
+Pozosta³a do omówienia jeszcze jedna rzecz dotycz¹ca instrukcji if , a zwi¹zana z traktowaniem przez jêzyk C wartoœci logicznych. Zamiast: 
+
+if ( a != 0 ) printf("a jest rozne od zera"); 
+
+mo¿emy napisaæ: 
+
+if( a ) printf("a jest rozne od zera"); 
+
+i bêdzie to dzia³a³o w identyczny sposób. Jak myœlisz czemu ? Jeœli przeczyta³eœ uwa¿nie wstêp do operacji logicznych to nie powinieneœ mieæ wiêkszych problemów z odpowiedzi¹ na to pytanie. W pierwszym przypadku mamy do czynienia z porównaniem wartoœci zmiennej a do zera. Przyk³adowo, jeœli zmienna a jest równa dziesiêæ to warunek "a != 0" zwróci prawdê do instrukcji if oraz zostanie wyœwietlony na ekranie tekst. Natomiast co z drugim przypadkiem ? Nie mamy tu do czynienia z ¿adnym porównaniem, do instrukcji if jest od razu przekazywana wartoœæ zmiennej a, czyli w naszym przypadku dziesiêæ. Zauwa¿, nie prawda , nie fa³sz , ale liczba dziesiêæ ! I co siê stanie teraz ? Po prostu na ekranie pojawi siê tekst. Pamiêtasz jak jêzyk C traktuje wartoœci logiczne ? Stanowi fa³sz odpowiada liczba zero, natomiast stanowi prawda ka¿da inna wartoœæ. Czyli tak¿e liczba dziesiêæ ! Tak wiêc liczba ta zostanie potraktowana jako stan prawda oraz w wyniku tego zostanie wykonana odpowiednia instrukcja (blok instrukcji) - w naszym przypadku zostanie wywo³ana funkcja printf .
+
+Na zakoñczenie tego punktu zamieœci³em jeszcze przyk³ad czêsto pope³nianego b³êdu (który na dodatek bardzo trudno jest zlokalizowaæ), zwi¹zanego z w³aœnie takim traktowaniem stanów logicznych przez jêzyk C: 
+
+if( a = 0 ) printf("a jest równe zero");
+else printf("a jest ró¿ne od zera"); 
+
+Jak myœlisz, co zostanie wyœwietlone na ekranie, jeœli powiem Ci, ¿e zmienna a jest równa zero ? Jeœli odpowiesz, ¿e bêdzie to "a jest równe zero" to niestety nie bêdziesz mia³ racji. Mo¿esz zapytaæ: "Ale czemu ? Przecie¿ mamy porównanie a do zera oraz poniewa¿ a jest równe zero, to powinien wyœwietliæ siê pierwszy napis.". Mia³byœ racjê, jeœli naprawdê by³oby tam porównanie. Jednak przyjrzyj siê uwa¿nie - tam nie ma porównania ! Porównanie w jêzyku C to podwójny znak równoœci, natomiast pojedynczy (tak jak jest w tym przypadku) oznacza przypisanie. Tak wiêc najpierw zostanie tu przypisana wartoœæ zero do zmiennej a, a nastêpnie (tak jak w poprzednim przyk³adzie) wartoœæ tej zmiennej zostanie przekazana do instrukcji if , która potraktuje j¹ jako fa³sz (bo zero w³aœnie to oznacza) oraz w efekcie wywo³a funkcjê printf wystêpuj¹c¹ po else .
+
+
+
+8.3. Podstawowe operacje logiczne 
+
+
+W podpunkcie tym przedstawiê cztery podstawowe operacje logiczne - OR, AND, NOT oraz XOR. Jeœli wiesz na jakiej zasadzie one dzia³aj¹ to mo¿esz przejœæ do nastêpnego podpunktu. Zero w tabeli odpowiada stanowi fa³sz , natomiast jedynka odpowiada stanowi prawda .
+
+Operacja OR (lub)
+ Wejœcie
+Wyjœcie
+0
+0
+0
+1
+0
+1
+0
+1
+1
+1
+1
+1
+
+Wynikiem operacji OR jest zero, gdy oba argumenty s¹ równe zero, lub jedynka w przeciwnym wypadku. 
+
+
+Operacja AND (i)
+ Wejœcie
+Wyjœcie
+0
+0
+0
+1
+0
+0
+0
+1
+0
+1
+1
+1
+
+Wynikiem operacji AND jest jedynka, gdy oba argumenty s¹ równe jeden, lub zero w przeciwnym wypadku. 
+
+
+Operacja XOR
+ Wejœcie
+Wyjœcie
+0
+0
+0
+1
+0
+1
+0
+1
+1
+1
+1
+0
+
+Wynikiem operacji XOR jest jedynka, gdy tylko jeden z argumentów jest równy jeden, lub zero w przeciwnym wypadku. 
+
+
+Operacja NOT
+ Wejœcie
+Wyjœcie
+0
+1
+1
+0
+
+Wynikiem operacji NOT jest jedynka, gdy argument by³ równy zero, lub zero, gdy argument by³ równy jeden. 
+
+
+
+8.4. Operacje logiczne w jêzyku C 
+
+
+Przedstawione w poprzednim punkcie operacje maj¹ w jêzyku C dwa aspekty - logiczny oraz arytmetyczny (operacje na bitach). Co prawda drugi z nich nale¿a³oby przedstawiæ ju¿ wczeœniej, przy okazji omawiania operacji arytmetycznych, jednak zrobiê to dopiero w tym punkcie z uwagi na podobieñstwo. Najpierw jednak skupmy siê na pierwszym aspekcie. Oto jak operacje logiczne zapisujemy w jêzyku C: 
+
+Operacja
+C
+Pascal
+OR
+||
+or
+AND
+&&
+and
+NOT
+!
+not
+
+Poniewa¿ o wiele ³atwiej jest uczyæ siê na przyk³adach, podam teraz program, który zilustruje wykorzystanie poznanych operacji logicznych. 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int a = 17;
+
+  // przyk³ad u¿ycia operacji logicznej OR
+  if( (a  10) ) {
+    printf("Zmienna a jest mniejsza od piêciu _lub_ wiêksza od dziesiêciu.\n\n");
+  }
+
+  // przyklad u¿ycia operacji logicznej AND
+  if( (a  10) && (a 
+
+
+Poniewa¿ pocz¹tek programu nie wymaga chyba komentarza (jeœli wymaga to cofnij siê, proszê, do poprzednich punktów), analizê naszego programu zaczniemy od linijki z pierwszym wyst¹pieniem instrukcji if . 
+
+W naszym przypadku chcemy wykonaæ jakieœ dzia³anie (wyœwietlenie tekstu na ekranie), gdy zmienna a jest mniejsza od piêciu lub te¿ wiêksza od dziesiêciu. Idealnie do tego celu nadaje siê operacja logiczna OR , której u¿ywa siê, gdy chcemy sprawdziæ czy chocia¿ jeden z podanych warunków jest prawdziwy . Widzimy, ¿e mamy tu dwa porównania - pierwsze (a < 5) , dla zmiennej a równej siedemnaœcie zwraca fa³sz , jednak drugie (a > 10) , zwraca prawdê (bo 17 > 10). Operacja logiczna OR dla takich parametrów zwraca prawdê (zobacz w tabeli przedstawionej powy¿ej), tak wiêc zostanie wyœwietlony na ekranie odpowiedni tekst. Zapamiêtaj wiêc - jeœli chcesz sprawdziæ, czy którykolwiek z warunków jest spe³niony, u¿yj operacji OR. 
+
+W sytuacji, gdy wykonanie dzia³ania ma zale¿eæ od spe³nienia wszystkich warunków, u¿ywamy natomiast instrukcji logicznej AND . Pokazane jest to przy okazji nastêpnej instrukcji if . W tym wypadku chcemy wykonaæ dzia³anie tylko wtedy, gdy zmienna a jest wiêksza od dziesiêciu oraz mniejsza od dwudziestu (czyli zawiera siê w okreœlonym przedziale). Pierwszy warunek (a > 10) , dla zmiennej a równej siedemnaœcie zwraca prawdê , drugi (a < 20) tak¿e zwraca prawdê . Patrz¹c do tabeli widzimy, ¿e w takim przypadku wynikiem operacji AND jest prawda , wiêc na ekranie zostanie wyœwietlony tekst o tym informuj¹cy. Zapamiêtaj wiêc - jeœli chcesz wykonanie dzia³ania uzale¿niæ od spe³nienia wszystkich warunków, u¿yj operacji AND. 
+
+PrzejdŸmy teraz do omówienia ostatniej, najprostszej operacji logicznej, a mianowicie NOT . Jest ona po prostu negacj¹ (zaprzeczeniem) danego parametru - tzn. ¿e dla parametru prawda zwróci fa³sz, natomiast dla parametru fa³sz zwróci wartoœæ prawda. Pokazuje to wyraŸnie trzecia z instrukcji if w naszym programie. Warunek (a < 10) jest sformu³owany tak, ¿e dla zmiennej a równej siedemnaœcie, zwróci fa³sz , czyli normalnie tekst nie zosta³by wyœwietlony na ekranie. Jednak w naszym przypadku wystêpuje jeszcze negacja, która "zamienia" fa³sz na prawdê oraz w efekcie na ekranie pojawi siê odpowiedni napis. 
+
+
+
+8.5. Operacje na bitach 
+
+
+Pozosta³o jeszcze do omówienia zastosowanie poznanych operacji logicznych do wykonywania dzia³añ na bitach. Do zrozumienia (i wykorzystania w swoich programach) podanych w tym punkcie informacji konieczna bêdzie znajomoœæ podstaw dwójkowego systemu zapisu liczb. Jeœli nie wiesz co to takiego to sugerujê, ¿ebyœ pomin¹³ teraz ten punkt oraz powróci³ do niego po zagl¹dniêciu do ksi¹¿ki z matematyki (ja to mia³em w 7 lub 8 klasie podstawówki, teraz to chyba bêdzie w gimnazjum). Najpierw przedstawiê operatory jêzyka C stosowane do operacji na bitach: 
+
+Operacja
+C
+Pascal
+OR
+|
+or
+AND
+&
+and
+XOR
+^
+xor
+NOT
+~
+not
+
+Wszystkie przedstawione w tabeli operacje maj¹ tak¹ sam¹ zasadê dzia³ania. Pierwsze trzy operuj¹ na dwóch argumentach, natomiast ostatnia tylko na jednym. Algorytm dzia³ania tych pierwszych wygl¹da tak: 
+
+1. Najpierw zamieniasz oba argumenty na postaæ binarn¹.
+2. Teraz bierzesz zerowe bity obu argumentów oraz wykonujesz odpowiedni¹ operacjê logiczn¹
+3. To, co otrzyma³eœ zapisujesz w zerowym bicie wyniku.
+4. Punkty dwa oraz trzy wykonujesz kolejno dla pierwszego, drugiego, itd. bitu argumentu.
+Natomiast algorytm dzia³ania operacji NOT jest du¿o prostszy - po prostu neguje ona wszystkie bity argumentu. Czyli w efekcie tam, gdzie by³y zera, teraz bêd¹ jedynki oraz odwrotnie. 
+
+Byæ mo¿e nie zrozumia³eœ wszystkiego z powy¿szego opisu. Jednak nie martw siê - wszystko siê wyjaœni przy analizie przyk³adowego programu: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  char a=12, b=9;
+
+  printf("%d and %d = %d\n", a, b, a & b);
+  printf("%d or  %d = %d\n", a, b, a | b);
+  printf("%d xor %d = %d\n", a, b, a ^ b);
+  printf("not %d   = %d\n", b, ~b);
+}
+
+
+
+
+Ka¿de z wywo³añ funkcji printf prezentuje inny operator. Zacznijmy od operacji AND. 
+
+Jak widzisz wykonujemy operacjê AND na dwóch argumentach - zmiennej a równej dwanaœcie oraz zmiennej b równej dziewiêæ. Po zapisaniu tego w postaci dwójkowej wygl¹da to nastêpuj¹co: 
+
+ 1100  (12 w systemie dziesiêtnym)
+ AND
+ 1001  (9 w systemie dziesiêtnym)
+ ====
+ 1000  (8 w systemie dziesiêtnym)
+Na podstawie algorytmu dzia³ania przedstawionego powy¿ej poka¿ê w jaki sposób otrzymaliœmy w efekcie liczbê osiem. Najpierw zamieniamy obie liczby na postaæ binarn¹. Dla lepszego zobrazowania zapisa³em je jedna nad drug¹. Bierzemy teraz zerowy (ten z prawej) bit pierwszej liczby (12) - jest on równy zero. Nastêpnie bierzemy zerowy bit drugiej liczby (9) - jest on równy jeden. Wykonujemy operacjê AND na tych danych - w efekcie otrzymujemy zero (zobacz w tabeli dla operacji AND), któr¹ to zapisujemy jako zerowy bit wyniku. Teraz to samo wykonujemy dla pierwszych bitów obu liczb. Tym razem oba s¹ równe zero, wiêc w wyniku tak¿e otrzymujemy zero. Nastêpnie wykonujemy operacjê dla bitów numer trzy obu liczb. Wynikiem dzia³ania dla argumentów równych jeden oraz zero jest ponownie zero. Dokonujemy tej samej operacji dla bitów numer cztery obu liczb - w efekcie wykonania operacji AND na obu argumentach równych jeden, otrzymujemy jedynkê. Wynikiem ca³ej operacji jest wiêc liczba 1000 w systemie dwójkowych. Liczba ta w systemie dziesiêtnym jest równa osiem oraz w³aœnie ona zostanie wyœwietlona na ekranie. 
+
+Nastêpn¹ operacj¹ jest operacja OR . Po zapisaniu jej podobnie jak poprzednio otrzymujemy: 
+
+ 1100  (12 w systemie dziesiêtnym)
+  OR
+ 1001  (9 w systemie dziesiêtnym)
+ ====
+ 1101  (13 w systemie dziesiêtnym)
+Algorytm dzia³ania jest identyczny jak poprzednio, tylko zamiast operacji AND wykonujemy operacjê OR. Wynikiem tej operacji jest jedynka, gdy którykolwiek z argumentów jest jedynk¹, st¹d te¿ tylko dla bitu pierwszego otrzymaliœmy zero, a reszta bitów jest równa jeden. 
+
+Przedostatni¹ operacj¹ jest XOR : 
+
+ 1100  (12 w systemie dziesiêtnym)
+ XOR
+ 1001  (9 w systemie dziesiêtnym)
+ ====
+ 0101  (5 w systemie dziesiêtnym)
+I znowu wykonujemy identyczne operacje, zamieniaj¹c tylko operacjê na XOR. Dla przypomnienia - wynikiem tej operacji jest jedynka, gdy tylko jeden z argumentów jest równy jeden. 
+
+Ostatni¹ operacj¹ jest operacja NOT . Jak zapewne zauwa¿y³eœ po uruchomieniu programu, wynikiem operacji NOT 9 jest liczba minus dziesiêæ, któr¹ binarn¹ reprezentacj¹ jest 11110110. A oto jak j¹ otrzymaliœmy: 
+
+ NOT
+ 00001001  (9 w systemie dziesiêtnym)
+ ======== 
+ 11110110  (-10 w systemie dziesiêtnym)
+Jest to najprostsza z operacji logicznych - ja widaæ odwraca po prostu wszystkie bity argumentu. 
+
+
+
+
+9. Instrukcje pêtli 
+
+
+Instrukcje pêtli s³u¿¹ do wielokrotnego, uzale¿nionego od jakiegoœ warunku, wykonywania danego fragmentu kodu. Jêzyk C posiada trzy podstawowe konstrukcje pêtli. W tym punkcie zostan¹ one przedstawione wraz z przyk³adami ich u¿ycia. 
+
+
+
+9.1. Pêtla "while" 
+
+
+Zaczniemy od razu od przyk³adowego programu: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int licznik = 10;
+
+  printf("Poczatek petli\n");
+  while(licznik  0)
+  {
+    printf("Zmienna licznik = %d\n", licznik);
+    licznik--;
+  }
+  printf("Koniec petli\n");
+}
+
+
+
+Skompiluj go proszê oraz uruchom. Na ekranie pojawi siê dziesiêæ linii tekstu o treœci: "Zmienna licznik = xx", gdzie xx symbolizuje kolejne numerki od dziesiêæ do jeden. Zapewne ju¿ siê domyœlasz jak dzia³a pêtla oparta na instrukcji while , lecz dla dope³nienia formalnoœci opiszê to pokrótce. Pêtla rozpoczyna siê od s³owa kluczowego while , po którym, podobnie jak w przypadku instrukcji if , podajemy warunek kontynuowania pêtli. Pêtla bêdzie wykonywana dopóty, dopóki warunek ten jest spe³niony. Nastêpnie podajemy instrukcjê, która bêdzie wykonywana w pêtli. Jeœli chcesz wykonywaæ w pêtli kilka instrukcji, musisz zawrzeæ je w bloku ograniczonym znakami { oraz } (podobnie jest w wszystkich konstrukcjach jêzyka C). W naszym przyk³adowym programie wykonujemy w pêtli dwie instrukcje - wywo³ujemy funkcjê printf oraz zmniejszamy zawartoœæ zmiennej licznik o jeden. Algorytm dzia³ania tego programu wygl¹da nastêpuj¹co: 
+
+1. Wpisz wartoœæ dziesiêæ do zmiennej licznik.
+2. Wyœwietl na ekranie tekst informuj¹cy o rozpoczêciu dzia³ania pêtli.
+3. Napotykamy siê na instrukcjê "while" - sprawdza ona czy wartoœæ
+   zmiennej licznik jest wiêksza od zera (na pocz¹tku programu jest,
+   bo wpisaliœmy do niej dziesiêæ) oraz jeœli tak to przechodzi do linijki
+   z wywo³aniem funkcji "printf", wewn¹trz bloku. Zauwa¿, ¿e gdybyœmy 
+   zainicjalizowali zmienna licznik wartoœci¹ np. minus jeden, to od razu
+   skoczylibyœmy do kroku numer siedem oraz na ekranie pokaza³by siê napis o
+   zakoñczeniu dzia³ania pêtli ! Warunek przy instrukcji "while" by³by 
+   bowiem od razu fa³szywy, w zwi¹zku z tym dzia³anie programu by³oby
+   kontynuowane od pierwszej linijki za blokiem instrukcji dla pêtli.
+   Jak zobaczysz w nastêpnym punkcie, istnieje tak¿e pêtla, która sprawdza 
+   warunek na koñcu pêtli oraz w wyniku tego wykona siê ona, w przeciwieñstwie
+   do "while", przynajmniej jeden raz.
+4. Jesteœmy teraz wewn¹trz bloku oraz za pomoc¹ instrukcji "printf"
+   wyœwietlamy informacjê o aktualnym stanie licznika.
+5. Zmniejszamy wartoœæ zmiennej licznik o jeden.
+6. Skaczemy do kroku numer trzy - dokonuje siê tam znowu sprawdzenie
+   warunku oraz w zale¿noœci od tego, czy zmienna licznik osi¹gnê³a ju¿ zero,
+   czy nie, program bêdzie kontynuowa³ swe dzia³anie od kroku numer cztery,
+   albo siedem.
+7. Wyœwietlamy informacjê o zakoñczeniu dzia³ania pêtli oraz program koñczy
+   swe dzia³anie.
+Jeszcze jedna uwaga dla znaj¹cych Pascala - oczywiœcie odpowiednikiem while w jêzyku C jest instrukcja Pascala o tej samej nazwie. 
+
+
+
+9.2. Pêtla "do-while" 
+
+
+Pêtla "do-while" jest bardzo podobna do poznanej w poprzednim punkcie "while". Jedyn¹ ró¿nic¹ jest fakt, ¿e o ile pêtla while mog³a w ogóle siê nie wykonaæ, jeœli warunek nie by³ spe³niony, o tyle pêtla do-while wykona siê przynajmniej jeden raz, bo warunek sprawdzany jest dopiero na samym koñcu. A oto jak bêdzie wygl¹da³ nasz program z poprzedniego punktu przy u¿yciu nowej konstrukcji: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int licznik = 10;
+
+  printf("Poczatek petli\n");
+  do
+  {
+    printf("Zmienna licznik = %d\n", licznik);
+    licznik--;
+  } while(licznik  0);
+
+  printf("Koniec petli\n");
+}
+
+
+
+Jak widzisz ró¿nica jest minimalna. Zwróæ tylko uwagê, ¿e po while tym razem stawiamy œrednik. Odpowiednikiem tej konstrukcji w Pascalu jest pêtla repeat-until . Wystêpuje tu jednak ró¿nica - pêtla repeat-until wykonuje siê do momentu, gdy warunek _stanie siê_ prawdziwy, natomiast do-while wykonuje siê _dopóki_ warunek jest prawdziwy. 
+
+
+
+9.3. Pêtla "for" 
+
+
+Najbardziej rozbudowan¹ konstrukcj¹ pêtli jest pêtla "for". Ogólny jej zapis wygl¹da nastêpuj¹co: 
+
+for(inicjalizacja; warunek; inkrementacja) 
+{
+  instrukcje do wykonania
+}
+Pêtla ta dzia³a na podstawie takiego oto algorytmu: 
+
+1. Wykonywane s¹ instrukcje zawarte w czêœci "inicjalizacja". Jest to wykonywane
+   tylko jeden raz, na samym pocz¹tku pêtli.
+2. Sprawdzany jest warunek - jeœli jest fa³szywy to nastêpuje skok do kroku
+   numer szeœæ.
+3. Wykonywane s¹ "instrukcje do wykonania".
+4. Wykonywane s¹ instrukcje zawarte w czêœci "inkrementacja".
+5. Nastêpuje skok do kroku numer dwa.
+6. Pêtla koñczy siê - wykonywane s¹ instrukcje poza pêtl¹.
+¯aden z podanych parametrów nie jest wymagany, tak wiêc najprostsz¹ pêtl¹ przy u¿yciu "for" jest: 
+
+for(;;)
+{
+  instrukcje do wykonania
+}
+Tak¹ konstrukcjê nazywa siê czasem "forever" poniewa¿ jest to pêtla nieskoñczona (bêdzie wykonywa³a siê a¿ do momentu, gdy u¿ytkownik zresetuje komputer lub gdy napotka instrukcjê break lub goto, o których to powiemy póŸniej). 
+
+Poka¿my wreszcie jak bêdzie wygl¹da³ nasz przyk³adowy program z poprzednich punktów przy u¿yciu pêtli "for": 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int licznik;
+
+  printf("Poczatek petli\n");
+
+  for(licznik=10; licznik  0; licznik--)
+  {
+    printf("Zmienna licznik = %d\n", licznik);
+  }
+
+  printf("Koniec petli\n");
+}
+
+
+
+Jak widzisz konstrukcja ta jest ju¿ nieco inna od poznanych wczeœniej. W czêœci inicjalizacyjnej dokonujemy ustawienia zmiennej licznik na dziesiêæ. Moglibyœmy to zrobiæ tak jak poprzednio (od razu j¹ ustawiæ przy deklaracji) oraz czêœæ t¹ zostawiæ pust¹, ale napisa³em to w ten sposób, ¿eby pokazaæ, ¿e mo¿na coœ takiego zrobiæ. Nastêpnie widzimy warunek - tu nic nowego, wygl¹da on dok³adnie tak samo jak poprzednio. Zmniejszenia licznika nie dokonujemy jednak wewn¹trz pêtli, lecz w czêœci "inkrementacja". Oczywiœcie moglibyœmy to zrobiæ wewn¹trz pêtli, a t¹ czeœæ pozostawiæ pust¹, ale zosta³o to wykonane w ten sposób, aby zaprezentowaæ sposób u¿ycia. 
+
+Czêœci "inicjalizacja" oraz "inkrementacja" mog¹ zawieraæ tak¿e po kilka instrukcji - oddzielamy je wtedy przecinkami. Dla zobrazowania takiej konstrukcji zamieœci³em nieco zmodyfikowan¹ wersjê poprzedniego programu - zosta³a dodana jeszcze jedna zmienna, która jest zwiêkszana z ka¿dym przejœciem pêtli o dwa: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int licznik, a;
+
+  printf("Poczatek petli\n");
+
+  for(licznik=10, a=5; licznik  0; licznik--, a+=2)
+  {
+    printf("Zmienna licznik = %d\n", licznik);
+    printf("Zmienna a       = %d\n", a);
+  }
+
+  printf("Koniec petli\n");
+}
+
+
+
+
+<BR
+
+
+9.4. Break, continue oraz goto 
+
+
+Czasem mo¿e siê zdarzyæ potrzeba pominiêcia jednego przebiegu pêtli lub wczeœniejszego jej przerwania. S³u¿¹ do tego celu dwie wspomniane instrukcje. Instrukcja break jest wrêcz konieczna w przypadku zastosowania pêtli nieskoñczonej (pokazanej w poprzednim punkcie). Przyjrzyjmy siê nieco zmodyfikowanemu programowi z poprzedniego punktu: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int licznik;
+
+  printf("Poczatek petli\n");
+
+  for(licznik=10; licznik  0; licznik--)
+  {
+    if(licznik == 5) continue;
+    if(licznik == 2) break;
+    printf("Zmienna licznik = %d\n", licznik);
+  }
+
+  printf("Koniec petli\n");
+}
+
+
+
+Jak widzimy program niewiele ró¿ni siê od poprzedniego - zosta³y tylko dodane dwie linijki z instrukcj¹ warunkow¹ if . W przypadku, gdy zmienna licznik jest równa piêæ wykonywana jest instrukcja continue , a gdy jest równa dwa, wykonywana jest instrukcja break . Skompiluj teraz, proszê, program oraz uruchom go. Widzisz jaka jest ró¿nica ? Z pocz¹tku program dzia³a identycznie z poprzednim - do wartoœci zmiennej licznik równej szeœæ jest wyœwietlana odpowiednia linia. Jednak linijka informuj¹ca, ¿e zmienna licznik jest równa piêæ w ogóle nie zosta³a wyœwietlona - odpowiedzialna jest za to instrukcja continue . Na pocz¹tku nie jest ona wykonywana, jednak gdy zmienna licznik dojdzie do wartoœci piêæ, zostaje ona wykonana. Powoduje to, ¿e pêtla for pomija wszystkie nastêpuj¹ce po continue instrukcje wewn¹trz pêtli (dla danego przebiegu) oraz przechodzi od razu do nastêpnej iteracji. W nastêpnych dwóch przebiegach ¿aden z warunków wystêpuj¹cych po instrukcjach if nie jest spe³niony oraz program wyœwietla informacje, ¿e zmienna licznik jest równa, kolejno, cztery oraz trzy. Dochodzimy teraz do momentu, gdy zmienna licznik osi¹ga wartoœæ dwa. W takim wypadku spe³niony jest warunek drugiej z instrukcji if oraz wykonywana jest instrukcja break . Jaki jest tego rezultat widzisz na ekranie - pêtla koñczy swe dzia³anie oraz zostaje wyœwietlony komunikat o tym informuj¹cy. 
+
+Alternatyw¹ instrukcji break jest instrukcja goto . Mimo, ¿e w przypadku jêzyków strukturalnych (jakim jest jêzyk C, jak równie¿ Pascal) jej stosowanie jest wrêcz têpione (szczególnie na poziomie nauczania jêzyka), to jest jednak sytuacja, gdy mo¿na j¹ zastosowaæ poniewa¿ nie istnieje ¿aden inny prosty sposób osi¹gniêcia celu. Sytuacj¹ t¹ jest wyjœcie z zagnie¿d¿onej pêtli. Od razu to zilustrujemy odpowiednim przyk³adem - za³ó¿my, ¿e mamy do czynienia z takim przypadkiem: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int a, b;
+
+  printf("Poczatek petli\n");
+
+  for(a=0; a < 4; a++)
+  {
+    for(b=0; b < 4; b++)
+    {
+      // if((a==2) && (b==1)) break;
+      printf("a = %d, b = %d\n", a, b);
+    }
+  }
+  printf("Koniec petli\n");
+}
+
+
+
+Jak widzimy mamy tu zagnie¿d¿on¹ pêtlê, tzn. jedna pêtla jest wykonywana w drugiej. W sumie otrzymamy wiêc na ekranie 4*4=16 linijek tekstu. Za³ó¿my teraz, ¿e chcielibyœmy zakoñczyæ wykonywanie obu pêtli przy zmiennej a równej dwa oraz zmiennej b równej jeden. Jeœli u¿ylibyœmy instrukcji break (tak jak to pokazano w komentarzu) to przerwalibyœmy tylko pêtlê, w której jest zwiêkszana wartoœæ zmiennej b. W efekcie na ekranie pojawi³oby siê: 
+
+Poczatek petli
+a=0, b=0
+a=0, b=1
+a=0, b=2
+a=0, b=3
+a=1, b=0
+a=1, b=1
+a=1, b=2
+a=1, b=3
+a=2, b=0
+a=3, b=0
+a=3, b=1
+a=3, b=2
+a=3, b=3
+Koniec petli
+Czyli jak widzimy pêtla "b" rzeczywiœcie zosta³a przerwana przy a równym dwa, ale nastêpnie zosta³a ona ponownie wykonana dla a równego trzy. A my chcieliœmy zakoñczyæ obie pêtle ! Rozwi¹zaniem jest tutaj u¿ycie instrukcji goto: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int a, b;
+
+  printf("Poczatek petli\n");
+
+  for(a=0; a < 4; a++)
+  {
+    for(b=0; b < 4; b++)
+    {
+      if((a==2) && (b==1)) goto koniec;
+      printf("a = %d, b = %d\n", a, b);
+    }
+  }
+
+  koniec:
+
+  printf("Koniec petli\n");
+}
+
+
+
+
+W programie tym instrukcja break zosta³a zast¹piona przez goto koniec . "koniec" jest to tzw. etykieta. Zadeklarowaliœmy j¹ przed ostatni¹ instrukcj¹ programu - jest to po prostu dowolna nazwa zakoñczona dwukropkiem. W programie mo¿emy zadeklarowaæ dowoln¹ liczbê etykiet (oczywiœcie ka¿da musi mieæ inn¹ nazwê). Aby przenieœæ wykonywanie programu do innego miejsca nale¿y wykonaæ instrukcjê goto podaj¹c jej nazwê etykiety, do której ma nast¹piæ skok. W naszym przypadku po wykonaniu instrukcji goto koniec program wyœwietli informacjê o koñcu pêtli oraz zakoñczy swe dzia³anie. Po uruchomieniu powy¿szego programu na ekranie uzyskamy: 
+
+Poczatek petli
+a=0, b=0
+a=0, b=1
+a=0, b=2
+a=0, b=3
+a=1, b=0
+a=1, b=1
+a=1, b=2
+a=1, b=3
+a=2, b=0
+Koniec petli
+czyli dok³adnie to, o co nam chodzi³o. 
+
+
+
+
+10. Instrukcja switch 
+
+
+Instrukcja switch jest odpowiednikiem pascalowej instrukcji case . Jeœli znasz pascala to ju¿ wiesz o co chodzi, jeœ³i jednak nie, to zaraz zobaczysz jak to wygl¹da w praktyce oraz kiedy mo¿e siê przydaæ. Za³ó¿my, ¿e mamy taki oto program: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int a = 5;
+
+  if(a == 4) printf("Zmienna a jest rowna cztery.\n");
+  else if((a == 5) || (a==6)) printf("Zmienna a jest równa piec lub szesc.\n");
+  else printf("Zmienna a jest nie jest rowna ani cztery, ani piec, ani szesc.\n");
+}
+
+
+
+Jaki widzisz program na podstawie wartoœci zmiennej a wypisuje na ekranie odpowiedni tekst. Aby ten cel osi¹gn¹æ musieliœmy zastosowaæ sekwencjê instrukcji if . Nie wygl¹da to jednak zbyt elegancko. W³aœnie takim przypadku mo¿emy u¿yæ instrukcjê switch . A oto jak bêdzie wygl¹da³ nasz program przy jej u¿yciu: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int a = 5;
+
+  switch(a) 
+  {
+    case 4 : printf("Zmienna a jest rowna cztery.\n");
+             break;
+    case 5 :
+    case 6 : printf("Zmienna a jest rowna piec lub szesc.\n");
+             break;
+    default: printf("Zmienna a jest nie jest rowna ani cztery, ani piec, ani szesc.\n");
+  }  
+}
+
+
+
+Wed³ug mnie jest to o wiele bardziej czytelne, czy¿ nie ?
+Dobrze, napiszê wiêc coœ wiêcej o samej konstrukcji. Generalnie wygl¹da ona tak: 
+ switch(wyra¿enie) 
+ {
+   case wartosc1: instrukcje; break;
+   case wartosc2: instrukcje; break;
+   .
+   .
+   .
+   default: instrukcje;
+ }
+Jak widzisz zaczynamy od s³owa kluczowego switch . Zaraz po nim podajemy w nawiasie wyra¿enie, od którego wartoœci bêdzie mia³a zale¿eæ akcja, która zostanie wykonana. W naszym przyk³adowym programie chcieliœmy, ¿eby napis na ekranie by³ zale¿ny od zmiennej a, wiêc wpisaliœmy tam po prostu "a". Jednak nic nie stoi na przeszkodzie, aby na przyk³ad wpisaæ tam "a*3+b" (zak³adaj¹c oczywiœcie, ¿e zadeklarowaliœmy wczeœniej zmienn¹ b). Nastêpnie otwieramy blok oraz wpisujemy po s³owie kluczowym case wartoœci, które bêd¹ porównywane z tym wyra¿eniem. Konstrukcja switch szuka pierwszej wartoœci, która jest równa wyra¿eniu podanemu w nawiasie. Jeœli j¹ znajdzie to przekazuje wykonywanie programu do tego miejsca. Nastêpnie wykonywane s¹ kolejne instrukcje, a¿ do napotkania nawiasu klamrowego koñcz¹cego blok switch , albo a¿ do napotkania instrukcji break. Jeœli ¿adna z wartoœci podanych po case'ach nie jest równa danemu wyra¿eniu to wykonywane s¹ instrukcje po slowie kluczowym default (jego u¿ywanie nie jest konieczne - tak wiêc, jeœli siê go nie wpisze to ¿adne dzia³anie nie zostanie wykonane). W naszym przypadku zmienna a by³a równa piêæ, tak wiêc wykonywanie programu zosta³o przekazane do miejsca, w którym mamy przypadek "case 5:". Poniewa¿ nie wystêpuje po nim instrukcja break , to wykonywanie programu jest kontynuowane. W nastêpnej linijce wyœwietlany jest napis informuj¹cy o wartoœci zmiennej oraz program przechodzi do nastêpnej linii. Mamy tam s³owo kluczowe break , które koñczy konstrukcjê switch .
+Gdyby zmienna a by³a równa cztery to przeszlibyœmy do linijki z "case 4:", wywo³anaby by³a funkcja printf wystêpuj¹ca dalej oraz program napotka³by instrukcjê break , która zakoñczy³aby dzia³anie konstrukcji switch .
+Gdyby zaœ zmienna ta by³a równa dziesiêæ, to przeszlibyœmy do linijki z "default:", wyœwietlony by³by odpowiedni napis.
+Na koniec jeszcze uwaga dla osób znaj¹cych pascala - oczywiœcie odpowiednikiem przedstawionej tu instrukcji jest w tym jêzyku instrukcja case. 
+
+
+
+
+11. Operator "?" 
+
+
+Operator ? jest bardzo u¿yteczn¹, lecz czêsto nie docenian¹ konstrukcj¹. Jak zwykle jego zastosowanie poka¿emy na przyk³adzie. Za³ózmy, ¿e mamy do czynienia z dwoma zmiennymi a oraz b oraz chcielibyœmy wyœwietliæ na ekranie wartoœæ wiêkszej z nich. Program przy u¿yciu znanej ju¿ instrukcji if wygl¹da³by tak: 
+#include <stdio.h>
+
+void main(void)
+{
+  int a = 5, b = 6, c;
+
+  if(a > b) c=a; else c=b;
+
+  printf("Max(a,b) = %d\n", c);
+}
+Jak widzisz programik jest proœciutki - gdy zmienna a jest wiêksza od zmiennej b to przypisuje zmiennej c wartoœæ zmiennej a, natomiast w przeciwnym wypadku przypisuje jej wartoœæ zmiennej b. Nastêpnie na ekranie wyœwietla wartoœæ zmiennej c.
+Jednak teoria o tym, ¿e programiœci to leniwe bestie potwierdza siê oraz tym razem ;) Co z tego, ¿e zapis jest proœciutki, skoro mo¿na zrobiæ to jeszcze proœciej ? Do tego celu s³u¿y w³aœnie operator ? . Nasz programik przy jego u¿yciu wygl¹da³by tak: 
+#include <stdio.h>
+
+void main(void)
+{
+  int a = 5, b = 6, c;
+
+  c = (a > b) ? a : b;
+
+  printf("Max(a,b) = %d\n", c);
+}
+Jak widzisz instrukcja if zosta³a zamieniona na coœ, co z pocz¹tku mo¿e wydawaæ siê strasznie dziwnym zapisem. Jednak nie przera¿aj siê - wcale nie jest to takie straszne. Zauwa¿, ¿e mamy tu do czynienia z takim przypadkiem: 
+ c = jakieœ_wyra¿enie; // gdzie wyra¿enie to jest operatorem "?"
+Ogólna konstrukcja tego operatora wygl¹da tak: 
+  (wyra¿enie_logiczne) ? wyra¿enie_gdy_prawda : wyra¿enie_gdy_fa³sz
+Najpierw sprawdzane jest wyra¿enie logiczne w nawiasie, jeœli jest ono prawdziwe, to obliczana jest wartoœæ wyra¿enia znajduj¹cego sie po znaku ? oraz jest ona zwracana, natomiast w przypadku, gdy wyra¿enie logiczne by³o fa³szywe to obliczana jest wartoœæ wyra¿enia znajduj¹cego siê po znaku : oraz w³aœnie ona jest zwracana. Czyli w naszym przyk³adowym programie najpierw sprawdzamy, czy zmienna a jest wiêksza od zmiennej b. Poniewa¿ a jest równe piêæ, natomiast b jest równe szeœæ to wyra¿enie to jest fa³szywe oraz obliczana jest wartoœæ wyra¿enia wystêpuj¹cego po znaku : . W naszym przypadku jest tam po prostu zmienna b, ktorej wartoœæ jest zwracana oraz przypisana do zmiennej c. 
+
+Zapewne powiesz: "No dobrze, ale ten zapis wcale nie jest du¿o krótszy od poprzedniego, a poza tym jest o wiele mniej czytelny". Masz racjê, jednak ca³a si³a operatora ? tkwi w tym, ¿e mo¿na go u¿ywaæ praktycznie w ka¿dej sytuacji. Przyk³adowo, nasz program mo¿na zapisaæ w ten sposób: 
+#include <stdio.h>
+
+void main(void)
+{
+  int a = 5, b = 6;
+
+  printf("Max(a,b) = %d\n", (a>b) ? a : b);
+}
+Jak widzisz wartoœæ wyra¿enia jest od razu przekazywana do funkcji printf . Czegoœ takiego przy u¿yciu instrukcji if nie da siê zrobiæ, bo nie zwraca ona ¿adnej wartoœci, a jedynie, w zale¿noœci od warunku, wykonuje te, lub inne instrukcje. 
+
+
+
+
+12. Rzutowanie 
+
+
+O rzutowaniu wspomnia³em ju¿ w punkcie Mój pierwszy program. Mieliœmy tam do czynienia z tak¹ oto sytuacj¹: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int a = 5, b = 3;
+  float r;
+  
+  r = a / b;  
+  printf("r = %f\n", r);
+}
+
+
+
+Jak zapewne pamiêtasz wynik tej operacji nieco Ciê zaskoczy³ - nie by³o to "1.666667", lecz po prostu "1.000000". Dzia³o siê tak dlatego, ¿e argumenty operacji dzielenia by³y typu ca³kowitego, a ten, jak wiesz, nie przechowuje informacji o czêœci u³amkowej. W efekcie wynik operacji tak¿e by³ ca³kowity oraz ta w³aœnie ca³kowita wartoœæ by³a przypisana zmiennej r. Aby temu zaradziæ mo¿na wykorzystaæ tzw. rzutowanie. Jest to tymczasowa, tylko dla potrzeb obliczenia danego wyra¿enia, zmiana typu. Typ ten jednak nie zmienia siê fizycznie, po prostu kompilator traktuje zmienn¹ danego typu tak, jakby by³a typu, na który j¹ rzutujemy. Tak wiêc nasz program mo¿emy zapisaæ nastêpuj¹co: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  int a = 5, b = 3;
+  float r;
+  
+  r = (float)a / b;  
+  printf("r = %f\n", r);
+}
+
+
+
+Jak widzisz program ten niewiele ró¿ni siê od poprzedniego. Jedyn¹ ró¿nic¹ jest to, ¿e przed zmienn¹ a przy operacji dzielenia dodany zosta³ taki oto ci¹g znaków: "(float)". W³aœnie ten ci¹g informuje kompilator, ¿e zmienna (lub wyra¿enie) nastêpuj¹ce za nim ma byæ traktowane tak, jakby by³o typu float . W naszym przypadku mówimy kompilatorowi, ¿eby potraktowa³ zmienn¹ a jakby by³a typu rzeczywistego (czyli tak naprawdê rozszerza j¹ do postaci "5.0"), a nastêpnie t¹ rzeczywist¹ liczbê podzieli³ przez zmienn¹ b, która jest typu ca³kowitego.
+Podumowuj¹c, rzutowanie wykorzystujemy, aby przy operacjach przypisania do siebie ró¿nych typów poinformowaæ kompilator, ¿e wiemy, co robimy oraz ma on traktowaæ to zgodnie z naszym ¿yczeniem. Aby dokonaæ rzutowania danej zmiennej, czy wyra¿enia na inny typ, nale¿y przed ni¹ (nim) wpisaæ w nawiasach typ, na który chcemy rzutowaæ. 
+
+
+
+
+13. Definicja w³asnych typów 
+
+
+Jêzyk C, poza wbudowanymi typami danych (np. int , czy float ), umo¿liwia tak¿e definicjê w³asnych typów danych. W tym punkcie zostan¹ przedstawione ró¿ne aspekty tego tematu. 
+
+
+
+13.1. Typ wyliczeniowy 
+
+
+Typ wyliczeniowy nie jest typem danych w œcis³ym tego s³owa znaczeniu, gdy¿ jest to odpowiednik typu int . Ma on jednak ciekaw¹ cechê, a mianowicie kolejne jego elementy mo¿emy nazwaæ wedle swojego uznania. Jak zwykle prezentacjê nowych rzeczy zaczniemy od przyk³adowego programu: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void)
+{
+  enum {Pn, Wt, Sr, Czw, Pt, Sb=10, Nd} DzienTyg;
+
+  DzienTyg = Pn; printf("Wartosc dla poniedzialku = %d\n", DzienTyg);
+  DzienTyg = Wt; printf("Wartosc dla wtorku = %d\n", DzienTyg);
+  DzienTyg = Sr; printf("Wartosc dla srody = %d\n", DzienTyg);
+  DzienTyg = Czw; printf("Wartosc dla czwartku = %d\n", DzienTyg);
+  DzienTyg = Pt; printf("Wartosc dla piatku = %d\n", DzienTyg);
+  DzienTyg = Sb; printf("Wartosc dla soboty = %d\n", DzienTyg);
+  DzienTyg = Nd; printf("Wartosc dla niedzieli = %d\n", DzienTyg);
+}
+
+
+
+W programie tym chcemy operowaæ na zmiennej, która bêdzie przechowywaæ dzieñ tygodnia. Moglibyœmy po prostu zadeklarowaæ j¹ jako int oraz przyj¹æ za³o¿enie, ¿e poniedzia³kowi odpowiada wartoœæ zero, wtorkowi wartoœæ jeden itd. Jednak, gdy przy dalszej rozbudowie programu chcielibyœmy przypisaæ tej zmiennej wartoœæ "Œroda" to musielibyœmy sobie przypominaæ jaka liczba jej odpowiada. Mo¿emy jednak u³atwiæ sobie to zadanie dziêki zastosowaniu enum . Ka¿dej kolejnej wartoœci mo¿emy przydzieliæ identyfikator, który ³atwiej bêdzie zapamiêtaæ. Jak widzisz w naszym programie zadeklarowaliœmy identyfikatory "Pn", "Wt", "Sr" itd. enum ju¿ sam zadba o przydzielenie im konkretnych wartoœci - tzn. "Pn" bêdzie odpowiada³o wartoœci zero, "Wt" jeden itd. Jeœli z jakiegoœ powodu chcia³byœ, aby od pewnego identyfikatora nast¹pi³ przeskok oraz ¿eby liczenie zaczyna³o siê od innej wartoœci to podajesz j¹ po znaku równoœci. W naszym przyk³adzie identyfikatorowi "Sb" przydzieliliœmy wartoœæ dziesiêæ (pamiêtaj, ¿e kolejnym identyfikatorom bêda odpowiada³y zmienione ju¿ wartoœci - w naszym przyk³adzie niedzieli bêdzie przydzielona wartoœæ jedenaœcie). Teraz zamiast pisaæ: 
+DzienTyg = 2;
+mo¿emy po prostu napisaæ: 
+DzienTyg = Sr;
+Wa¿ne jest jednak, abyœ pamiêta³, ¿e mimo faktu przypisywania zmiennej wartoœci poprzez nadane identyfikatory, to nadal s¹ to zwyk³e liczby. 
+
+
+
+13.2. Typedef 
+
+
+Przedstawione w poprzednim podpunkcie enum mimo faktu, ¿e mamy tam wp³yw na nadawanie nazw identyfikatorom, nie deklaruje jednak nowego typu. Zmienna typu wyliczeniowego jest ci¹gle zmienn¹ typu int . Do deklaracji nowego typu danych s³u¿y instrukcja typedef . A oto przyk³ad jej u¿ycia: 
+
+
+
+
+#include &ltstdio.h>
+
+typedef float rzeczywista;
+
+void main(void)
+{
+  rzeczywista a=4.5;
+
+  printf("%f\n", a);
+}
+
+
+
+Ogólna postaæ deklaracji to wygl¹da nastêpuj¹co: 
+typedef definicja_typu nazwa_nowego_typu;
+W naszym przypadku przyk³ad deklaracji nowego typu danych, któremu nadaliœmy nazwê "rzeczywista", mamy w drugiej linijce programu. Okreœliliœmy tam, ¿e nowy typ bêdzie po prostu typem float tylko ze zmienion¹ nazw¹. Poniewa¿ identyfikator "rzeczywista" odpowiada od tego momentu nowemu typowi danych to mo¿emy zadeklarowaæ sobie zmienn¹ tego typu. W funkcji main deklarujemy zmienn¹ o nazwie a. Poniewa¿ jej typ zosta³ wyprowadzony z typu float to mo¿emy u¿ywaæ jej tak, jakby by³a to zmienna typu float. W naszym programie po prostu j¹ wyœwietlamy na ekranie. 
+
+Zastanawiasz siê zapewne czemu s³u¿y to polecenie, skoro mo¿emy po prostu u¿ywaæ wbudowanego typu float . Odpowiedzi s¹ trzy. Po pierwsze, deklaracja ta mo¿e dotyczyæ o wiele bardziej z³o¿onego typu danych. Po drugie, dziêki temu mo¿emy w ³atwy sposób przenieœæ nasz program na inny kompilator lub system. Przypomnij sobie, ¿e na przyk³ad zmienna typu int mo¿e na jednym kompilatorze zajmowaæ cztery bajty, a na innym tylko dwa. Mo¿emy w ³atwy sposób temu zaradziæ poprzez deklaracjê naszego nowego typu o nazwie na przyk³ad "MOJINT" oraz wszêdzie go u¿ywaæ. Teraz jeœli chcielibyœmy go przenieœc na inny kompilator to wystarczy jedynie zmieniæ deklaracjê typu oraz gotowe ! Trzecim powodem mo¿e byæ chêæ zwiêkszenia precyzji obliczeñ. Jeœli program wszelkie obliczenia wykonywa³ na zmiennych typu float to w takim przypadku musielibyœmy zmieniæ wszelkie wyst¹pienia tego typu na typ double . A tak wystarczy jedynie zadeklarowaæ nowy typ, na przyk³ad "MOJFLOAT" oraz u¿ywaæ go zamiast float , a przy koniecznoœci zwiekszenia precyzji zmieniæ jedynie deklaracjê typu "MOJFLOAT" tak, ¿eby wyprowadzony by³ z typu double . 
+
+
+
+13.3. Struktury 
+
+
+W tym punkcie powiemy sobie o strukturach (odpowiednikach pascalowych rekordów), czyli o z³o¿onym typie danych. Jest to typ danych tworzony przez programistê, który jest kombinacj¹ wczeœniej zdefiniowanych typów, w³¹czaj¹c w to, oprócz typów prostych, inne typy zdefiniowane przez programistê (tak¿e inne struktury). Zaczniemy, jak zwykle, od przyk³adowego programu: 
+
+
+
+
+#include &ltstdio.h>
+
+typedef struct {
+  int godziny;
+  int minuty;
+  int sekundy;
+} CZAS;
+
+void main(void)
+{
+  CZAS teraz;
+  int  ile_sekund;
+
+  teraz.godziny = 23;
+  teraz.minuty  = 53;
+  teraz.sekundy = 21;
+
+  printf("Teraz jest %d:%d:%d\n", teraz.godziny, teraz.minuty, teraz.sekundy);
+
+  ile_sekund = teraz.sekundy + teraz.minuty*60 + teraz.godziny*3600;
+  printf("Od poczatku dnia uplynelo %d sekund.\n", ile_sekund);
+}
+
+
+
+Analizê programu zaczniemy od miejsca definicji nowego typu danych, który tym razem nie bêdzie, tak jak ostatnio, tylko odpowiednikiem prostego typu, lecz ca³kowicie nowym, z³o¿onym typem (struktur¹). Ogólna postaæ definicji struktury wygl¹da nastêpuj¹co: 
+ typedef struct {
+   typ nazwa_pola1;
+   typ nazwa_pola2;
+   .
+   .
+   .
+   typ nazwa_polaN;
+ } nazwa_struktury;
+W naszym przypadku zdefiniowaliœmy sobie strukturê o nazwie CZAS zawieraj¹c¹ trzy pola typu int (godziny, minuty oraz sekundy), która zosta³a zaprojektowana do przechowywania informacji o konkretnym czasie (st¹d nazwa ;) Moglibyœmy co prawda te same informacje przechowywaæ w trzech osobnych zmiennych, ale co jeœli chcielibyœmy mieæ dane o dwóch ró¿nych godzinach ? Musielibyœmy dodaæ trzy nowe zmienne, co wkrótce doprowadzi³oby do kompletnego chaosu. Struktura pozwala nam przechowywaæ potrzebne infromacje, przy czym wszystko znajduje sie w jednym miejscu - zamiast trzech, mamy tylko jedn¹ zmienn¹. PrzejdŸmy dalej - na pocz¹tku funkcji main widzimy deklaracjê zmiennej typu CZAS o nazwie "teraz", która bêdzie przechowywaæ potrzebne nam informacje. Czyli narazie nic nowego. Natomiast w nastêpnych trzech linijkach widzimy zupe³nie now¹ kostrukcjê. Przedstawia ona w jaki sposób odwo³ujemy siê do poszczególnych pól struktury - czyli: podajemy nazwê zmiennej (u nas nazywa siê ona "teraz"), potem stawiamy kropkê, a nastêpnie podajemy nazwê pola, do którego siê odnosimy. Poza tym, ¿e do poszczególnych pól odwo³ujemy siê w nowy sposób, mo¿emy z nich korzystaæ tak jakby by³aby to normalna zmienna o danym typie - czyli mo¿emy przypisywaæ jej wartoœæ, czy te¿ u¿ywaæ wszelkich operatorów, co zosta³o pokazane na przyk³adzie obliczania liczby sekund, które up³ynê³y od pocz¹tku dnia. 
+
+Strukturê mo¿na tak¿e zdeklarowaæ tak¿e w nieco inny sposób ni¿ przedstawiony wczeœniej, a mianowicie: 
+ struct nazwa_struktury {
+   typ nazwa_pola1;
+   typ nazwa_pola2;
+   .
+   .
+   .
+   typ nazwa_polaN;
+ };
+Jednak ja zalecam stosowanie tego pierwszego sposobu, gdy¿ przy deklaracji zmiennej nie wystarczy napisaæ tak jak w poprzednim przypadku: 
+  nazwa_struktury nazwa_zmiennej;
+ale nale¿y zastosowaæ nieco d³u¿sza sk³adniê: 
+ struct nazwa_struktury nazwa_zmiennej;
+Poza tym faktem, oba sposoby deklaracji nie ró¿ni¹ siê niczym. 
+
+
+
+13.4. Unie 
+
+
+Unie "z wygl¹du" s¹ bardzo podobne do znanych Ci ju¿ struktur. Inny jest jednak cel ich wykorzystania. S³u¿¹ one mianowicie efektywnemu wykorzystaniu pamiêci. Ka¿de ich pole zajmuje fizycznie t¹ sam¹ komórkê pamiêci, z tego te¿ wzglêdu, w danym momencie mo¿e byæ wykorzystywane tylko jedno z ich pól. Jeœli wydaje Ci siê to dziwne to przyjrzyj siê nastêpuj¹cemu przyk³adowi: 
+
+
+
+
+#include &ltstdio.h>
+
+typedef union {
+ float szybkosc_w_wezlach;
+ int   szybkosc_w_km;
+} POJAZD;
+
+void main(void)
+{
+  POJAZD samochod, statek;
+
+  samochod.szybkosc_w_km    = 220;
+  statek.szybkosc_w_wezlach = 34.5;
+
+  printf("Max. szybkosc samochodu to %d km/h\n", samochod.szybkosc_w_km);
+  printf("Max. szbkosc statku to %3.1f wezlow\n", statek.szybkosc_w_wezlach);
+}
+
+
+
+
+Za³o¿eniem programu jest przechowywanie informacji o maksymalnej szybkoœci danego pojazdu. Jednak pojazdem mo¿e byæ zarówno samochód, który ma t¹ informacjê wyra¿on¹ w km/h, jak równie¿ statek, w przypadku którego wyra¿a siê j¹ w wêz³ach. Tak wiêc, gdybyœmy wykorzystali do tego celu strukturê to jedno z pól prawie nigdy nie by³oby wykorzystywane, przez co tracilibyœmy miejsce w pamiêci. Co prawda w tym przypadku by³yby to zaledwie cztery bajty, ale gdybyœmy mieli du¿¹ tablicê takich struktur (o których powiemy póŸniej) to strata by³aby ju¿ znaczna. W takim przypadku mo¿emy wykorzystaæ uniê - zadeklarowaliœmy dwa pola, do których mo¿emy odwo³ywaæ siê u¿ywaj¹c ró¿nych nazw, jednak tak na prawdê zajmuj¹ one tylko tyle miejsca w pamiêci, ile zajmujê najwiêkszy element (w naszym przypadku oba pola maj¹ wielkoœæ cztery bajty, wiêc unia zajmuje w pamiêci tak¿e cztery bajty). Myœlê, ¿e nie trzeba omawiaæ problemu od strony sk³dniowej - wystarczy powiedzieæ, ¿e sk³adnia jest dok³adnie taka sama jak w przypadku struktur. Jedyn¹ ró¿nic¹ jest to, ¿e zamiast s³owa kluczowego struct u¿ywamy s³owa kluczowego union . 
+
+
+
+13.5. Pola bitowe 
+
+
+Pola bitowe s¹ kolejnym odcinkiem z serii "Oszczêdzanie pamiêci". Maj¹ zastosowanie przy definicji struktur - przy pomocy tej konstrukcji mo¿emy zadeklarowaæ pole, którego wielkoœæ bêdzie mniejsza ni¿ jeden bajt (jeden lub kilka bitów - st¹d nazwa). A oto przyk³ad: 
+
+
+
+
+#include &ltstdio.h>
+
+typedef struct {
+ unsigned char  szyberdach   : 1;
+ unsigned char  abs          : 1;
+ unsigned char  ilosc_miejsc : 4;
+} SAMOCHOD;
+
+void main(void)
+{
+  SAMOCHOD ford;
+
+  ford.szyberdach = 1;
+  ford.abs = 1;
+  ford.ilosc_miejsc = 2;
+
+  printf("Ilosc miejsc : %d\n", ford.ilosc_miejsc);
+  if(ford.szyberdach) printf("Posiada szyberdach.\n");
+  if(ford.abs) printf("Posiada ABS.\n");
+}
+
+
+
+Program ten przechowuje oraz wyœwietla informacje o samochodzie, a konkretnie o liczbie miejsc, o tym, czy posiada szyberdach oraz ABS. Normalnie potrzebowalibyœmy zadeklarowaæ strukturê o trzech polach, która, przy zastosowaniu jednobajtowego typu char, zajê³aby trzy bajty w pamiêci. Dziêki zastosowaniu pól bitowych wszystkie te informacje zajmuj¹ jeden, jedyny bajt pamiêci (i to, w przeciwieñstwie do unii, z mo¿liwoœci¹ odwo³ywania siê do wszystkich pól jednoczeœnie). Jak to mo¿liwe ? Otó¿ ograniczyliœmy zakres poszczególnych pól. Zastanówmy siê, ile potrzeba miejsca w pamiêci, aby przechowaæ informacjê o fakcie wyposa¿enia, b¹dŸ nie, samochodu w ABS ? S¹ dwa mo¿liwe stany - jest lub nie ma. Czyli innymi s³owy jedynka, albo zero - wystarczy jeden bit ! To samo tyczy siê szyberdachu. Jeœli chodzi o liczbê miejsc to w tym przypadku ograniczy³em liczbê mo¿liwych wartoœci do 16 - po prostu przeznaczy³em na to pole cztery bity (a 2^4 = 16). W ten sposób zamiast u¿wyaæ trzech, struktura ta u¿ywa zaledwie jednego bajtu.
+Od strony sk³adniowej dostêp do pól bitowych jest identyczny, jak do tych "normalnych". Jedyn¹ ró¿nic¹ jest sposób ich deklaracji - tzn. deklaruje siê je tak samo, ale po typie oraz nazwie pola podaje siê dodatkowo, po dwukropku, iloœæ bitów, które zamierzamy przeznaczyæ na dane pole. 
+
+
+
+
+14. Tablice 
+
+
+Poniewa¿ istotê tablic naj³atwiej jest pokazaæ na przyk³adach, to w nastêpnych kilku podpunktach zostan¹ zaprezentowane przyk³adowe programy. Jednak zanim do nich dojdziemy przedstawiê ich podstawowe cechy.
+Tablic u¿ywa siê w przypadku, gdy chcemy przechowywaæ du¿¹ iloœæ danych tego samego typu przy zachowaniu ³atwego do nich dostêpu. Mimo tego, ¿e tablica mo¿e przechowywaæ wiele danych jednego typu, odwo³ujemy siê do niej za pomoc¹ jednej nazwy. Jednak aby móc okreœliæ, o który dok³adnie element nam chodzi, musimy u¿yæ dodatkowo indeksu, czyli kolejnego (liczonego od zera) numeru elementu. Kolejne elementy s¹ umiejscowione w pamiêci komputera jeden za drugim. Aby lepiej to zobrazowaæ przedstawiê na rysunku piêcioelementow¹ tablicê, której elementy s¹ typu float: 
+
+
+
+Jak widzimy na rysunku pocz¹tek tablicy jest umiejscowiony w pamiêci komputera pod adresem 1000 (to oczywiœcie jest tylko przyk³ad, tablica ta mo¿e znajdowaæ sie pod zupe³nie innym adresem). W³aœnie pod tym adresem znajduje siê element tablicy o numerze zero - w naszym przypadku ma on wartoœæ trzy. Nastêpny element o numerze jeden, który zawiera wartoœæ piêæ, znajduje siê pod adresem 1004. Zapewne powiesz: "Zaraz, zaraz - przecie¿ elementy w tablicy mia³y byæ umiejscowione w pamiêci jeden za drugim. Dlaczego wiêc nie znajduje siê on pod adresem 1001 ?". Otó¿ dlatego, ¿e tablica ta zawiera elementy typu float. A jak zapewne pamiêtasz z punktu trzeciego, na przechowanie danej tego typu potrzeba a¿ czterech bajtów pamiêci. Z tego te¿ powodu mamy do czynienia z tak¹ sytuacj¹, ¿e kolejne elementy tablicy s¹ umiejscowione w pamiêci pod adresami ró¿ni¹cymi siê o cztery. Na zakoñcaenie tego punktu podam jeszcze jedn¹ wa¿n¹ cechê tablic - adres tablicy jest sta³y. Raz przydzielony nie zmienia siê przez ca³y czas dzia³ania programu. I jeszcze jedna informacja dla osób znaj¹cych pascala - odpowiednikiem konstrukcji u¿ytych w nastêpnych podpunktach jest konstrukcja "array [0..x] of typ". 
+
+
+
+14.1. Tablice o elementach typu prostego 
+
+
+W poprzednim punkcie zosta³y przedstawione ogólne informacje dotycz¹ce tablic. Poniewa¿ jednak suchy tekst prawie nigdy nie wyjaœni tematu tak dobrze jak przyk³ad, pos³u¿ymy siê w³aœnie tym narzêdziem. Za³ó¿my, ¿e chcemy napisaæ program, który obliczy nam œredni¹ z piêciu ocen. Bêdzie on wygl¹da³ nastêpuj¹co: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void) {
+  float srednia;
+  int   i;
+  float oceny[5];
+
+  // wpisujemy do tablicy przykladowe oceny z pieciu przedmiotow
+  oceny[0] = 3; oceny[1] = 5; oceny[2] = 5; oceny[3] = 3.5; oceny[4] = 3;
+
+  // sumujemy wszystkie oceny
+  srednia = 0;
+  for(i=0; i<5; i++) srednia += oceny[i];
+
+  // dzielimy sume przez ilosc ocen
+  srednia /= 5;
+
+  // wypisujemy wynik na ekranie
+  printf("Srednia ocen wynosi %1.1f\n", srednia);
+}
+
+
+
+Na pocz¹tku programu nie ma nic nowego - w³¹czenie pliku nag³ówkowego, deklaracja dwóch zmiennych o nazwach srednia oraz i. Jednak w nastêpnej linijce jest nowa rzecz - jak zapewne siê ju¿ domyœli³eœ jest to w³aœnie deklaracja tablicy. Przyjrzyjmy siê jej uwa¿nie - wygl¹da ona praktycznie identycznie, jak deklaracja zwyk³ej zmiennej. Najpierw wpisujemy typ danych, nastêpnie nazwê naszej tablicy (tutaj oceny). Ró¿nica pomiêdzy deklaracj¹ zwyk³ej zmiennej, a tablic¹ jest widoczna w ostatnim cz³onie. Przy deklaracji tablicy musimy jeszcze podaæ jej wielkoœæ. Robi siê to podaj¹c t¹ wartoœæ w nawiasach klamrowych. W naszym przypadku chcemy obliczyæ œredni¹ z piêciu ocen, tak wiêc zadeklarowaliœmy tablicê o wielkoœci piêæ.
+Do poszczególnych elementów w tablicy odwo³ujemy siê przy pomocy indeksu. Indeks jest liczony od zera, tak wiêc w naszym przypadku do poszczególnych elemetów tablicy mo¿emy siê dostaæ u¿ywaj¹c indeksów o numerach od zera do cztery. Pokazane jest to w nastêpnej linijce programu - wpisujemy tu kolejne oceny do tablicy. W³asnie w dostêpie poprzez indeks tkwi ca³a si³a tablic. Szczególnie objawia siê to w dwóch nastêpnych linijkach programu. Pomyœl co by by³o, gdybyœ chcia³ wykorzystaæ zwyk³e zmienne zamiast tablic - musia³byœ zadeklarowaæ piêæ osobnych zmiennych typu float (np. o nazwach ocena1, ocena2... itd.), a nastêpnie wpisaæ coœ takiego: 
+ srednia = ocena1 + ocena2 + ocena3 + ocena4 + ocena5;
+ srednia /= 5;
+Przy tej iloœci ocen do zsumowania jest to jeszcze akceptowalne, ale jeœli by³oby ich wiêcej to linijka ta koszmarnie by siê wyd³u¿y³a. Dziêki temu zaœ, ¿e do tablicy mo¿emy odwo³ywaæ sie u¿ywaj¹c indeksu, mogliœmy zawrzeæ ca³e sumowanie w pojedynczej pêtli przebiegaj¹cej od zera do czterech. W ka¿dym jej przebiegu zmienna srednia zostaje zwiêkszona o wartoœæ, która jest zawarta w elemencie tablicy o numerze i. Po ca³kowitym wykonaniu pêtli zmienna srednia zawiera sumê wszystkich elementów tablicy oraz wystarczy j¹ tylko podzieliæ przez ich iloœæ (w naszym przypadku przez piêæ), aby otrzymaæ œredni¹ ocen, która zostanie wyœwietlona w ostatniej linijce programu. 
+
+
+
+14.2. Tablice struktur 
+
+
+Oprócz tablic, których elementy bêd¹ typu prostego, w jêzyku C mo¿na tak¿e budowaæ bardziej z³o¿one tablice. Dla przyk³adu w tym punkcie utworzymy tablicê struktur. Za³ózmy, ¿e mamy do czynienia z bardzo ma³¹ firm¹, w której pracuje trzech pracowników. Dla ka¿dego pracownika chcemy mieæ mo¿liwoœæ wyœwietlenia informacji o jego pensji i numerze identyfikacyjnym. Poza tym chcemy tak¿e, aby program wyœwietla³ raport o kwocie, któr¹ bêdziemy musieli co miesi¹c przeznaczyæ na wyp³aty dla pracowników. Program realizuj¹cy te zadania bêdzie wygl¹da³ nastêpuj¹co: 
+
+
+
+
+#include &ltstdio.h>
+
+typedef struct {
+  int nr_id;
+  float pensja;
+} PRACOWNIK;
+
+void main(void) {
+  float     suma_wyplat;
+  int       i;
+  PRACOWNIK kadra[3]={ {25803, 1299.10}, {25809, 2100}, {7, 1500} };
+
+  // wyswietlamy informacje o pracowniku - jego nr id, i pensje
+  for(i=0; i<3; i++)
+    printf("Nr identyfikacyjny: %d\nPensja: %5.2f\n\n",
+           kadra[i].nr_id, kadra[i].pensja);
+
+  // obliczamy kwote potrzebna na wyplaty
+  suma_wyplat = 0;
+  for(i=0; i<3; i++) suma_wyplat += kadra[i].pensja;
+
+  printf("Suma wyplat wynosi: %5.2f\n", suma_wyplat);
+}
+
+
+
+
+Zacznijmy analizê tego programu. Pocz¹tek programu to dla nas nic nowego - deklaracja struktury o nazwie PRACOWNIK i dwóch zmiennych. Nastêpna linijka te¿ wygl¹da ju¿ znajomo, mamy tu deklaracjê tablicy o nazwie kadra, której elementy s¹ struktur¹ PRACOWNIK. Jednak mamy tu tak¿e przyk³ad pokazuj¹cy w jaki sposób mo¿emy od razu zainicjalizowaæ tablicê. Tak jak to by³o w przypadku "zwyk³ych" zmiennych po nazwie stawiamy znak równoœci, a nastêpnie wartoœæ, któr¹ chcemy przypisaæ. Jednak o ile w tamtym przypadku od razu wpisywaliœmy liczbê, czy te¿znak, to teraz jest to trochê bardziej skomplikowane. Wszystkie wartoœci, które chcemy wpisaæ do tablicy musimy zawrzeæ w nawiasach klamrowych, oddzielaj¹c je od siebie przecinkami. W naszym przypadku mamy jednak do czynienia z sytuacj¹, gdzie ka¿dy element tablicy jest tak¿e typem z³o¿onym. Musimy wiêc zastosowaæ t¹ technikê tak¿e oddzielnie dla ka¿dego elementu tablicy, wpisuj¹c w nawiasach klamrowych wartoœci poszczególnych pól struktury - pierwsza wartoœæ zostanie przypisana polu nr_id, natomiast druga wartoœæ polu pensja. Tylko na pierwszy rzut oka wydaje siê to strasznie zagmatwane. Wystarczy jednak uruchomiæ program oraz porównaæ wyniki wyœwietlone na ekranie z wartoœciami wpisanymi w tej linijce oraz wszystko stanie siê jasne. Dobrze, przejdŸmy do analizy nastêpnej linijki. Mamy tu do czynienia z podobn¹ sytuacj¹ jak w poprzednim punkcie. Pêtla przebiega po kolei wszystkie elementy tablicy, jednak o ile w poprzednim programie by³y one sumowane, to w tym s¹ po prostu wyœwietlane na ekranie. Mamy tu tak¿e przyk³ad odwo³wania siê do poszczególnych pól struktury, która jest elementem tablicy. Tak jak to by³o w przypadku jednej zmiennej strukturalnej, odwo³ujemy siê do poszczególnych pól oddzielaj¹c je od nazwy zmiennej przy pomocy kropki. Ostatnie trzy linijki programu s¹ praktycznie identyczne do tych, które by³y w poprzednim programie - po prostu sumujemy wartoœci pól pensja wszystkich elementów tablicy oraz sumê t¹ wpisujemy do zmiennej suma_wyplat. Otrzyman¹ wartoœæ wypisujemy na ekranie w ostatniej linijce programu. 
+
+
+
+14.3. Tablice o wielkoœci ustalanej przy kompilacji 
+
+
+W tym punkcie zostanie przedstawiona jeszcze jedna ciekawa cecha tablic w jêzyku C, a mianowicie okreœlanie wielkosæi tablicy przez kompilator na podstawie danych podanych przy jej automatycznej inicjalizacji. Rozwa¿my program z poprzedniego punktu, jednak zapisany w nieco inny sposób: 
+
+
+
+
+#include &ltstdio.h>
+
+typedef struct {
+  int nr_id;
+  float pensja;
+} PRACOWNIK;
+
+void main(void) {
+  float     suma_wyplat;
+  int       i;
+  PRACOWNIK kadra[]={ {25803, 1299.10}, {25809, 2100}, {7, 1500} };
+  int       wielkosc = sizeof(kadra) / sizeof(PRACOWNIK);
+
+  // wyswietlamy informacje o pracowniku - jego nr id, i pensje
+  for(i=0; oraz < wielkosc; i++)
+    printf("Nr identyfikacyjny: %d\nPensja: %5.2f\n\n",
+           kadra[i].nr_id, kadra[i].pensja);
+
+  // obliczamy kwote potrzebna na wyplaty
+  suma_wyplat = 0;
+  for(i=0; oraz < wielkosc; i++) suma_wyplat += kadra[i].pensja;
+
+  printf("Suma wyplat wynosi: %5.2f\n", suma_wyplat);
+}
+
+
+
+
+Z pocz¹tku program ten wydaje siê byæ identyczny jak poprzedni. Pierwsza ró¿nica wystêpuje dopiero w linijce, w której mamy deklaracjê tablicy. Zauwa¿, ¿e w nawiasach kwadratowych nie zosta³a podana jej wielkoœæ. Jednak mimo tego konstrukcja taka jest poprawna, poniewa¿ kompilator mo¿e domyœliæ siê wielkoœci tablicy na podstawie iloœci danych wprowadzonych w czêœci inicjalizacyjnej. Poniewa¿ wpisaliœmy tam dane o trzech pracownikach to kompilator utworzy tablicê o trzech elementach. Jednak wynika z tego dla nas nastêpne zadanie - musimy okreœliæ ile pracowników zawiera tablica, aby móc wyœwietliæ dane na ekranie. Poprzednio mieliœmy na sta³e ustawion¹ wielkoœæ tablicy na trzy, tak wiêc obie pêtle for ustawiliœmy tak, aby wykona³y siê trzykrotnie. Zastanawiasz siê zapewne po co w takim razie zastosowaliœmy tak¹ konstrukcjê, skoro musimy wykonywaæ dodatkowe prace aby program dzia³a³ tak jak poprzednio. Otó¿ rozwi¹zanie jest proste - pomyœl co by by³o gdybyœ zatrudni³ czwartego pracownika. Musia³byœ wpisaæ go do tablicy oraz zmieniæ jej wielkoœæ na cztery. Jednak to nie wszystko - we obu pêtlach musia³byœ tak¿e zmieniæ warunek kontynuacji tak, aby wykonywa³y siê cztery razy. A przy zastosowaniu konstrukcji u¿ytej w tym programie jedyne co bêdziesz musia³ zrobiæ, to wpisaæ nowego pracownika do tablicy - reszta wykona siê automatycznie. Dodatkowy pracê, polegaj¹c¹ na napisaniu wyra¿enia obliczaj¹cego wielkoœæ tablicy bêdziesz musia³ wykonaæ tylko jeden raz - podczas pisania programu. Korzyœci s¹ chyba oczywiste ? PrzejdŸmy wiêc do nastêpnej linijki, która obliczy iloœæ elementów w tablicy. Zastanówmy siê w jaki sposób mo¿aby obliczyæ t¹ wartoœæ. Najproœciej jest chyba podzieliæ wielkoœæ ca³ej tablicy przez wielkoœæ pojedynczego jej elementu - w³aœnie ten sposób jest zastosowany w naszym programie. Aby uzyskaæ wielkoœæ jakiejœ danej musimy u¿yæ funkcji sizeof . Zwraca ona wielkoœæ (w bajtach) podanej jako parametr danej. W naszym przypadku u¿yliœmy jej dwa razy. Najpierw do okreœlenia wielkoœci ca³ej tablicy - "sizeof(kadra)", a nastêpnie do okreœlenia wielkoœci pojedynczego jej elementu (w naszym przypadku struktury PRACOWNIK) - "sizeof(PRACOWNIK)". Po podzieleniu pierwszej wartoœci przez drug¹ otrzymaliœmy iloœæ elementów w tablicy, któr¹ to iloœæ przypisaliœmy zmiennej o nazwie wielkosc. Teraz, maj¹c iloœæ elementów w tablicy, jedyne co musimy zrobiæ to zamieniæ w stosunku do poprzedniego programu obie trójki w pêtli for na nasz¹ zmienn¹ wielkosc oraz to wszystko ! Program dzia³a zgodnie z naszymi zamierzeniami. 
+
+
+
+14.4. Tablice wielowymiarowe 
+
+
+Oprócz jednowymiarowych tablic poznanych w poprzednich podpunktach, jêzyk C umo¿liwia tworzenie tablic wielowymiarowych. Ich zastosowanie zostanie pokazane na przyk³adzie dwuwymiarowej tablicy, która bêdzie odpowiada³a planszy do gry "w statki." Jako za³o¿enie programu przyjmiemy, ¿e polu pustemu odpowiada wartoœæ zero w tablicy, natomiast jeœli na danym polu znajduje siê jakiœ statek, to ma ono wartoœæ jeden. Poza tym dla uproszczenia programu postawimy dla planszy tylko trzy statki jednomasztowe. A oto jak wygl¹da taki program: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void) {
+  int plansza[10][10];
+  int i, j;
+
+  // wyczyszczenie planszy - wypelnienie jej zerami
+  for(i=0; i<10; i++)
+    for(j=0; j<10; j++)
+      plansza[i][j] = 0;
+    
+  // ustawienie trzech jednomasztowcow
+  plansza[3][6] = 1; plansza[8][3] = 1; plansza[2][9] = 1;
+
+  // wyswietlenie informacji na ktorych polach znajduja sie statki
+  for(i=0; i<10; i++)
+    for(j=0; j<10; j++)
+      if(plansza[i][j]) printf("Statek znajduje sie na polu %d,%d\n", i, j);
+
+}
+
+
+
+Zaraz w pierwszej linijce funkcji main mamy do czynienia z deklaracj¹ tablicy dwuwymiarowej. Jak widzisz nie ró¿ni siê ona mocno od deklaracji zwyk³ej, jednowymiarowej tablicy. Jedyn¹ ró¿nic¹ jest to, ¿e wystêpuj¹ tu dwie sekcje z nawiasami kwadratowymi, które okreœlaj¹ wielkoœci poszczególnych wymiarów tablicy. W naszym przyk³adzie obie maj¹ wielkoœæ dziesiêæ, choæ oczywiœcie mog¹ mieæ ró¿ne wymiary. Jeœli chcia³byœ utworzyæ tablicê o wiêcej ni¿ dwóch wymiarach, to wystarczy, ¿e dopiszesz jeszcze jedn¹, lub wiêcej takich sekcji. Nastêpnie mamy wyczyszczenie naszej tablicy zerami. Odbywa siê to przy pomocy dwóch pêtli for przebiegaj¹cych od zera do dziewiêciu. Pêtla zewnêtrzna, w której zwiêkszana jest zmienna oraz odpowiada poszczególnym wierszom, natomiast pêtla wewnêtrzna poszczególnym kolumnom tablicy. Masz tu tak¿e przyk³ad w jaki sposób mo¿na odwo³ywaæ siê do poszczególnych elementów tablicy wielowymiarowej. Ró¿nica jest taka, jak przy deklaracji - wystarczy dodaæ dodatkow¹ sekcjê z nawiasami kwadratowymi, w których wpisujemy indeks dla danego wymiaru. W nastêpnej linijce ustawiamy na planszy trzy statki jednomasztowe, czyli po prostu w trzech miejscach w tablicy wpisujemy wartoœæ jeden. Ostatnie trzy linijki s³u¿a do wyœwietlenia informacji, na których polach znajduj¹ siê statki. Sprawdzamy po kolei wszystkie elementy tablicy (czyli naszej planszy do gry) oraz jeœli którymœ z nich ma wartoœæ ró¿n¹ od zera to wyœwietlamy informacjê o pozycji statku. 
+
+
+
+14.5. Tablice jako parametr funkcji 
+
+
+D³ugo siê zastanawia³em, czy napisaæ o tym ju¿ teraz, w tym punkcie, czy te¿ dopiero w nastêpnym - ju¿ po wyjaœnieniu istoty wskaŸników. Jednak zdecydowa³em siê umieœciæ to tutaj, gdy¿ mimo wszystko informacje te dotycz¹ g³ównie tablic. Jednak jeœli bêdziesz mia³ problemy ze zrozumieniem tego podpunktu to przeczytaj najpierw nastêpny punkt o wskaŸnikach, a nastêpnie powróæ do czytania tego podpunktu. 
+
+Na koniec wyk³adu o tablicach pozosta³a nam jeszcze do omówienia jedna rzecz, a mianowicie przekazywanie tablic do funkcji jako jeden z parametrów. Wiesz ju¿ co to s¹ funkcje i jak przekazywaæ do nich zmienne jako ich parametry, tak wiêc z sam¹ sk³adniow¹ stron¹ tego problemu nie powinieneœ mieæ k³opotów. Jedynym problemem mo¿e byæ zrozumienie istoty przekazywania tablic, ale myœlê, ¿e nawet jeœli teraz tego nie zrozumiesz, to po przeczytaniu nastêpnego punktu zrozumiesz to z pewnoœci¹.
+Jak zapewne pamiêtasz z wczeœniejszych punktów, w jêzyku C mamy do czynienia z tzw. przekazywaniem przez wartoœæ parametrów do funkcji. Znaczy³o to, ¿e nawet jeœli w ciele funkcji zmienna, która zosta³a do niej przekazana zosta³a zmieniona (tzn. przypisano jej now¹ wartoœæ) to po powrocie do miejsca wywo³ania funkcji mia³a dalej star¹ wartoœæ. Po prostu w momencie wywo³ania funkcji zosta³a utworzona kopia zmiennej, która zosta³a przekazana jako parametr oraz zmianom ulega³¹ w³aœnie ta kopia, a nie oryginalna zmienna. Od regu³y tej jest jednak pewien wyj¹tek. Jak siê zapewne domyœlasz wyj¹tkiem tym jest przekazywanie do funkcji tablic. Zwi¹zane jest to z tym, ¿e tablice mog¹ mieæ na prawdê ogromn¹ wielkoœæ oraz przy tworzeniu ich kopii mog³oby np. zabrakn¹æ wolnej pamiêci. Poza tym samo kopiowanie trwa³o by doœæ d³ugo, a jêzyk C by³ zaprojektowany z myœl¹ o jak najszybszym dzia³aniu programów w nim napisanych. Tablice w jêzyku C nie s¹ wiêc przekazywane przez wartoœæ, lecz zamiast tego przekazuje siê tzw. wskaŸnik do pierwszego elementu. Innymi s³owy do funkcji przekazuje siê adres pamiêci, pod którym znajduje siê pierwszy element tablicy (u³o¿enie tablicy w pamiêci zosta³o omówione na pocz¹tku tego punktu).
+Aby pokazaæ sposób w jaki mo¿esz przekazaæ tablicê do funkcji i udowodniæ fakt, ¿e nie s¹ one przekazywane przez wartoœæ napisa³em program, który to zademonstruje. Przed dalsz¹ lektur¹ skompiluj go proszê, uruchom oraz przyj¿yj siê uwa¿nie wynikom jego dzia³ania. 
+
+
+
+
+#include &ltstdio.h>
+
+int Suma(int tab[], int ilosc) {
+  int i, suma;
+
+  // obliczenie sumy wszystkich wartosci w tablicy
+  suma = 0;
+  for(i=0; oraz < ilosc; i++) suma += tab[i];
+
+  // robimy to aby udowodnic, ze tablica nie jest, natomiast zwykla zmienna
+  // jest przekazywana przez wartosc
+  tab[ilosc-1] = 11; ilosc = 100;
+
+  return suma;
+}
+
+void main(void) {
+  int tablica[]={6, 3, 123, 3, 5, 200};
+  int ilosc = sizeof(tablica) / sizeof(int);
+
+  printf("Przed wywolaniem funkcji ostatni element jest rowny %d.\n",
+          tablica[ilosc-1]);
+  printf("Przed wywolaniem funkcji zmienna ilosc jest rowna %d.\n",
+          ilosc);
+
+  printf("Suma wszystkich elementow jest rowna %d.\n", Suma(tablica, ilosc));
+
+  printf("Po wywolaniu funkcji ostatni element jest rowny %d.\n",
+          tablica[ilosc-1]);
+  printf("Po wywolaniu funkcji zmienna ilosc jest rowna %d.\n",
+          ilosc);
+}
+
+
+
+
+Wiêkszoœæ konstrukcji u¿ytych w tym programie powinna byæ dla Ciebie zrozumia³a. Praktycznie wszystko by³o ju¿ u¿yte w poprzednich programach, z jednym wyj¹tkiem, a mianowicie deklaracj¹ pierwszego parametru funkcji Suma jako tablicy. Przyjrzyj siê sposobowi deklaracji - wygl¹da ona bardzo podobnie jak deklaracja parametru typu prostego. Jedyn¹ ró¿nic¹ jest to, ¿e po nazwie podaliœmy jeszcze nawiasy klamrowe. Czyli 
+int Suma(int tab[], int ilosc)
+przeczytamy jako: definicja funkcji o nazwie Suma zwracaj¹cej wartoœæ typu int, która przyjmuje dwa parametry, z których pierwszy jest typu tablica intów oraz nazywa siê tab, natomiast drugi jest typu int oraz nazywa siê iloœæ.
+Skoro ju¿ wiesz wszystko co potrzebne odnoœnie sk³adni zastosowanej w programie mo¿emy przejœæ do jego analizy.
+Zaczynamy, jak zwykle, od funkcji main . Pocz¹tek to nic nowego - deklaracja tablicy intów o wielkoœci automatycznie obliczanej przez kompilator i deklaracja zmiennej o nazwie ilosc, która t¹ wielkoœæ bêdzie przechowywaæ. Nastêpnie, przy pomocy funkcji printf , wyœwietlamy na ekranie zawartoœæ ostatniego elementu tablicy i iloœæ elementów w niej zawartych. Nastêpnej linijce bêdziemy musieli siê przygl¹dn¹æ dok³adniej - zawiera ona wywo³anie funkcji Suma . Wartoœæ, któr¹ ta funkcja zwróci³a zostaje przekazana jako parametr do funkcji main oraz zostaje wyœwietlona na ekranie. Funkcja Suma oblicza sumê tylu elementów tablicy, która zosta³a przekazana jako pierwszy parametr, ile zost³o przekazanych jako parametr numer dwa. W naszym przypadku funkcja ma obliczyæ sumê wszystkich (bo zmienna iloœæ zawiera iloœæ elementów w tablicy) tablicy o nazwie... tablica. Przyj¿yj siê dok³adnie sposobowi, w jaki przkazaliœmy oba parametry do funkcji Suma - po prostu podaliœmy nazwy zmiennych. Skoro wywo³aliœmy nasz¹ funkcjê to przejdŸmy do analizy jej wnêtrza. Pocz¹tek to nic nowego - sumujemy elementy tablicy w sposób taki, jak w poprzednich programach oraz uzyskan¹ wartoœæ przypisujemy zmiennej o nazwie suma. Wartoœæ t¹ zwracamy do miejsca wywo³ania przy u¿yciu return w ostatniej linijce cia³a funkcji. Jednak we wczeœniejszej linijce u¿yliœmy dwóch przypisañ, aby zaprezentowaæ to, o czym wspomnia³em na pocz¹tku tego podpunktu - tablice s¹ przekazywane przez wskaŸnik, w przeciwieñstwie do innych typów przekazywanych przez wartoœæ. Aby to udowodniæ do ostatniego elementu tablicy wpisaliœmy liczbê jedenaœcie (na pocz¹tku by³o tam dwieœcie), natomiast zmiennej ilosc przypisaliœmy wartoœæ sto (by³a tam pocz¹tkowo wartoœæ szeœæ poniewa¿ tyle w³aœnie jest elementów w naszej tablicy). Po wykonaniu funkcji wyœwietlamy ponownie zawartoœæ obu tych danych, aby sprawdziæ czy fakt, ¿e zmodyfikowaliœmy je w funkcji return ma jakiekolwiek znaczenie. A oto jaki jest wynik wyœwietlony na ekranie po uruchomieniu tego programu: 
+ Przed wywolaniem funkcji ostatni element jest rowny 200.
+ Przed wywolaniem funkcji zmienna ilosc jest rowna 6.
+ Suma wszystkich elementow jest rowna 340.
+ Po wywolaniu funkcji ostatni element jest rowny 11.
+ Po wywolaniu funkcji zmienna ilosc jest rowna 6.
+Jak widzisz wynika z tego jednoznacznie, ¿e o ile w przypadku zmiennej ilosc jej wartoœæ w ogóle siê nie zmieni³a, to w przypadku tablicy jej wartoœæ uleg³a zmianie. 
+
+Mimo faktu, ¿e jêzyk C nie posiada tzw. przekazania przez referencjê (czyli odpowiednika var z pascala) to jednak sposób, który kompilator wykorzystuje przy przekazywaniu tablic do funkcji, mo¿emy samodzielnie zastosowaæ tak¿e w stosunku do typów prostych przy zastosowaniu tzw. wskaŸników. Jest to jednak temat na tyle obszerny, ¿e poœwiecony zostanie temu zagadnieniu ca³y nastêpny punkt. 
+
+
+
+
+15. WskaŸniki 
+
+
+Z ogólnymi informacjami dotycz¹cymi wskaŸników zapoznamy siê, podobnie jak to by³o w przypadku tablic, przy pomocy przyk³adowego rysunku. 
+
+
+
+Za³ó¿my, ¿e zadeklarowaliœmy sobie w programie zmienn¹ typu int o nazwie x oraz od razu przypisaliœmy jej wartoœæ 124. Czyli wygl¹da³oby to nastêpuj¹co: 
+int x=124;
+Za³ó¿my teraz, ¿e kompilator umieœci³ nasz¹ zmienn¹ w pamiêci pod adresem 1000. Czyli wygl¹da³oby to tak jak na rysunku przedstawionym powy¿ej. Spróbój teraz wczuæ siê w rolê kompilatora w przypadku, gdy w swoim programie ka¿desz mu wykonaæ nastêpuj¹ce polecenie: 
+ oraz = x;
+Czyli do jakiejœ zmiennej o nazwie oraz (która jest tu nieistotna) przypisujesz wartoœæ zmiennej x. Pomyœl co musi zrobiæ kompilator, ¿eby wykonaæ to polecenie. Interesuje nas sk¹d kompilator wie jak¹ wartoœæ ma nasza zmienna x ? OdpowiedŸ brzmi: nie wie. Jednak wie, w którym miejscu pamiêci znajduje siê zmienna. Sprawdza wiêc jaki jest jej adres - w naszym przypadku jest to adres 1000. Nastêpnie odczytuje komórkê pamiêci znajduj¹c¹ siê pod tym adresem oraz voila ! Otrzymuje w efekcie liczbê 124, która siê tam znajduje. Zastanawiasz siê teraz zapewne po co Ci to wszystko mówiê ? Otó¿ podobnie, z naszego (czyli programisty) punktu widzenia, dzia³aj¹ wskaŸniki. Za³ó¿my, ¿e oprócz naszej zmiennej x mamy jeszcze jedn¹ zmienn¹ (której deklaracji na razie nie podam), która ma wartoœæ 1000. W naszym przypadku jest ona umieszczona pod adresem 1016. Przypatrz siê teraz uwa¿nie rysunkowi. Czy nic nie wydaje Ci siê podejrzane ? Nasza druga zmienna zawiera wartoœæ, która jest równa adresowi zmiennej x ! T¹ drug¹ zmienn¹ nazywamy wskaŸnikiem oraz w przypadku, gdy chcemy odczytaæ zawartoœæ komórki pamiêci o adresie, który jest zawarty w tej zmiennej to mówimy kompilatorowi (oczywiœcie przy pomocy odpowiedniej sk³adni): "S³uchaj, podaj mi zawartoœæ komórki pamiêci, której adres jest zawarty w tej oto zmiennej (i tu j¹ podajemy)". Kompilator oczywiœcie stosuje siê do naszego polecenia oraz w efekcie mamy to o co nam chodzi³o.
+To by by³o na tyle jeœli chodzi o wyjaœnienie pojêcia wskaŸnika. W nastêpnych podpunktach zostan¹ pokazane na podstawie przyk³adowych programów sposoby ich deklaracji oraz wykorzystania. Mam proœbê, ¿ebyœ ten punkt czyta³ szczególnie uwa¿nie, gdy¿ jest to temat, który po pierwsze jest trudny, a po drugie bardzo wa¿ny. Praktycznie nie ma ¿adnego powa¿niejszego programu, który nie operowa³by na wskaŸnikach. 
+
+I jeszcze jedna uwaga na koniec tego wstêpu do wskaŸników. Nie bierz, proszê, zbyt dos³ownie sposobu odczytu watoœci zmiennej przez kompilator. Opisa³em sposób, w jaki robi³by to gdyby by³ cz³owiekiem. Kompilator cz³owiekiem jednak nie jest oraz robi to w rzeczywistoœci trochê inaczej. Z Twojego punktu widzenia nie jest jednak wa¿ne jak, wa¿ne jest to, ¿eby zrobi³ to dobrze. Zastosowa³em tak¹ formê opisu w takim celu, ¿ebyœ móg³ ³atwiej zrozumieæ istotê wskaŸników. Mam nadziejê, ¿e dziêki temu uda mi siê wyjaœniæ ten trudny dla pocz¹tkuj¹cego temat w sposób przystêpny. 
+
+
+
+15.1 Pierwszy program korzystaj¹cy ze wskaŸników 
+
+
+Poniewa¿ masz ju¿ teoretyczne podstawy nadszed³ ju¿ czas, aby zaprezentowaæ istotê wskaŸników w praktyce. A oto nasz pierwszy program, w którym wykorzystamy wskaŸniki: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void) {
+  int a;
+  int *b;
+
+  a = 11;
+  printf("Zmienna a jest rowna %d\n", a);
+
+  b = &a;
+  printf("Wartosc wskazywana przez wskaznik b wynosi %d\n", *b);
+
+  *b = 14;
+  printf("Zmienna a jest rowna %d\n", a);
+}
+
+
+
+Zanim przejdziesz do dalszego czytania kursu skompiluj oraz uruchom powy¿szy program. Na ekranie powinno pojawiæ siê: 
+
+Zmienna a jest rowna 11
+Wartosc wskazywana przez wskaznik b wynosi 11
+Zmienna a jest rowna 14
+Jak zwykle przejdziemy teraz do analizy naszego programu. Na pocz¹tku mamy zwyk³¹ deklaracjê zmiennej o nazwie a, która jest typu int. Jednak ju¿ w nastêpnej linijce mamy coœ nowego - jak siê domyœlasz jest to deklaracja wskaŸnika. Zauwa¿ jak niewiele ró¿ni siê ona od deklaracji zwyk³ej zmiennej. Na pocz¹tku piszemy jakiego typu bêdzie nasz wskaŸnik (tutaj jest to wskaŸnik na int), a nastêpnie nazwê zmiennej, któr¹ jednak, w odró¿nieniu od deklaracji zwyk³ej zmiennej, poprzedzamy gwiazdk¹. Nastêpne kilka linijek ma za zadanie pokazaæ istotê wskaŸników. Mam nadziejê, ¿e to co po wyjaœnieniu teoretycznym mog³o wydawaæ siê niejasne, teraz stanie siê zrozumia³e. Pierwsze dwie linijki tego fragmentu to nic nowego - zmiennej a&mbsp; przypisujemy wartoœæ jedenaœcie oraz nastêpnie wyœwietlamy j¹ na ekranie. Jednak w nastêpnej linijce mamy do czynienia z now¹ konstrukcj¹. Do zmiennej b (która, jak zapewne pamiêtasz, jest typu wskaŸnik na int) przypisujemy adres zmiennej a. Aby otrzymaæ adres danej zmiennej wystarczy postawiæ przed ni¹ znak ampersand "&". Tak wiêc wyra¿enie "&a" okreœla nam adres zmiennej a. Zwróæ uwagê na to, co zosta³o podkreœlone - adres, a nie wartoœæ ! Tak jak to by³o w wyjaœnieniu teoretycznym: jeœli nasza zmienna a znajdowa³aby siê w pamiêci komputera pod adresem 1000 to zmienna b bêdzie mia³a wartoœæ 1000, a nie 11 (która jest wartoœci¹ przechowywan¹ przez zmienn¹ a). Nastêpna linijka pokazuje jak odczytaæ wartoœæ wskazywan¹ przez zmienn¹ b - wystarczy przed nazw¹ zmiennej wskaŸnikowej postawiæ gwiazdkê. Zapamiêtaj wiêc: jeœli b jest zmienn¹ wskaŸnikow¹ to wyra¿enie "b" okreœla nam adres, który jest przechowywany w tej zmiennej, natomiast wyra¿enie "*b" okreœla wartoœæ przechowywan¹ w pamiêci komputera pod adresem, który zawiera ta zmienna. W nastêpnej linijce mamy pokazane do czego mo¿e nam to siê przydaæ. Mamy tu do czynienia z tak¹ oto sytuacj¹: 
+
+*b = 14;
+Pamiêtasz co oznacza³o wyra¿enie "*b" ? By³¹a to wartoœæ wskazywana przez zmienn¹ b. A poniewa¿ zmienna b wskazywa³¹ na zmienn¹ a (wskazania tego dokonaliœmy w linijce "b = &a;") to mimo tego, ¿e w ca³ym tym wyra¿eniu nie jest wspomniana nawet zmienna a, to tak naprawdê dokonamy zmiany w³aœnie jej wartoœci ! Aby to udowodniæ w nastêpnej linijce wypisujemy na ekranie wartoœæ zmiennej a - oraz rzeczywiœcie jest ona teraz równa czternaœcie. Jeœli ci¹gle nie wiesz czemu to przeczytaj uwa¿nie jeszcze raz ten podpunkt (oraz podpunkt teoretyczny). Jest to niezmiernie wa¿ne, gdy¿ bez jego zrozumienia nie uda Ci siê zrozumieæ podpunktów nastêpnych. 
+
+
+
+15.2 WskaŸniki a tablice 
+
+
+Miêdzy tymi dwoma konstrukcjami w jêzyku C zachodzi œcis³y zwi¹zek. Nazwa tablicy mo¿e byæ traktowana jako sta³y wskaŸnik do pierwszego jej elementu. Wynika z tego, ¿e tablicê mo¿na bezpoœrednio (bez rzutowania) przypisaæ do wskaŸnika (oczywiœcie zarówno tablica, jak oraz wskaŸnik musz¹ byæ tego samego typu). Pokazuje to nastêpuj¹cy program: 
+
+
+
+
+#include &ltstdio.h>
+
+void main(void) {
+  int tablica[3] = {5, 10, 15};
+  int *wskaznik;
+  int i;
+
+  for(i=0; i<3; i++) 
+    printf("tablica[%d] = %d\n", i, tablica[i]);
+
+  wskaznik = tablica;
+  for(i=0; i<3; i++, wskaznik++) 
+    printf("*(wskaznik+%d) = %d\n", i, *wskaznik);
+}
+
+
+
+Na pocz¹tku deklarujemy trzyelementow¹ tablicê typu int (z automatyczn¹ inicjalizacj¹), jedn¹ zmienn¹ bêd¹c¹ wskaŸnikiem na int i "zwyk³¹" zmienn¹ typu int. Zaraz po deklaracji zmiennych u¿ywanych przez program wyœwietlamy w pêtli wartoœci poszczególnych elementów tablicy. Czyli na razie nic nowego. To o czym traktuje ten podpunkt jest zawarte w nastêpnych trzech linijkach programu. W pierwszej z nich dokonujemy przypisania tablicy do wskaŸnika. Mo¿emy to zrobiæ, gdy¿, tak jak napisa³em we wstêpie do tego podpunktu, nazwa tablicy mo¿e byæ traktowana jako wskaŸnik do jej pierwszego elementu. Zapamiêtaj jednak ¿e ta operacja przypisuje wskaŸnikowi adres pierwszego elementu tablicy, a nie jego wartoœæ ! Nastêpne dwie linijki pokazuj¹ z kolei, ¿e na wskaŸnikach mo¿na tak¿e dokonywaæ pewnych operacji arytmetycznych. W naszym przyk³adowym programie w pêtli for dokonujemy zwiêkszenia wskaŸnika o jeden przy pomocy operatora ++ . Zapamiêtaj jednak, ¿e operacja ta zwiêksza wskaŸnik o jeden element typu, na który wskazuje wskaŸnik, a nie o jeden bajt ! Czyli jeœli wskaŸnik wskazuje (tak jak w naszym przypadku) na int to operacja zwiêkszenia wskaŸnika spowoduje, ¿e zmienna wskaŸnikowa bêdzie zawiera³a adres nastêpnego elementu typu int (czyli de facto bêdzie wiêksza o cztery bajty, bo tyle w³aœnie zajmuje int). W wiêkszoœci przypadków wiedza ta co prawda nie bêdzie Ci potrzebna, ale czasami mo¿e okazaæ siê przydatna (np. w sytuacji odnoszenia siê do tego samego obszaru pamiêci przy pomocy ró¿nych wskaŸników). Ostatnia linijka programu ma za zadanie wyœwietlenie wartoœci, na któr¹ wskazuje nasz wskaŸnik. Zauwa¿, ¿e u¿yliœmy tu konstrukcji "*wskaznik" poniewa¿ w³aœnie w ten sposób otrzymujemy t¹ wartoœæ. 
+
+
+
+15.3 WskaŸniki do struktur 
+
+
+Kolejnym zagadnieniem, które chcê poruszyæ jest u¿ywanie wskaŸników, które wskazuj¹ na strukturê. Odwo³ywanie siê do poszczególnych pól struktury jest nieco inne w takim przypadku, jednak ró¿nica jest minimalna. Pokazuje to poni¿szy program (który jest drobn¹ przeróbk¹ programu ju¿ wczeœniej przez nas analizowanego): 
+
+
+
+
+#include &ltstdio.h>
+
+typedef struct {
+  int godziny;
+  int minuty;
+  int sekundy;
+} CZAS;
+
+void main(void)
+{
+  CZAS teraz={23,53,21};
+  CZAS *wsk = &teraz;
+
+  printf("Teraz jest %d:%d:%d\n", teraz.godziny, teraz.minuty, teraz.sekundy);
+  printf("Teraz jest %d:%d:%d\n", wsk-godziny, wsk-minuty, (*wsk).sekundy);
+}
+
+
+
+Program ten ma za zadanie wyœwietliæ na ekranie godzinê, która zawarta jest w strukturze typu CZAS. Na pocz¹tku deklarujemy sobie zmienn¹ strukturaln¹ o nazwie teraz oraz od razu przypisujemy jej konkretn¹ wartoœæ. W nastêpnej linijce mamy do czynienia z deklaracj¹ wskaŸnika na strukturê typu CZAS, któremu tak¿e przypisujemy od razu wartoœæ - w naszym przypadku inicjalizujemy go tak, aby wskazywa³ na nasz¹ zmienn¹ strukturaln¹ teraz. Nastêpne dwie linijki wyœwietlaj¹ na ekranie ten sam tekst tylko u¿ywaj¹c do tego celu ró¿nych zmiennych. W pierwszej z nich robimy to przy u¿yciu "normalnej" zmiennej strukturalnej - w takim przypadku, jak zapewne pamiêtasz, nazwê pola oddzielamy kropk¹. W drugiej linijce mamy do czyniania z sytacj¹, w której odwo³ujemy siê do pola struktury poprzez wskaŸnik do niej. W takim przypadku jedyn¹ ró¿nic¹ jest to, ¿e zamiast kropki stosujemy swego rodzaju strza³kê zbudowan¹ z dwóch znaków: minusa i znaku wiêkszoœci. W naszym programie odwo³ujemy siê w ten sposób do dwóch pierwszych pól: godziny oraz minuty. Aby zademonstrowaæ inn¹ mo¿liwoœæ do pola sekundy odwo³aliœmy siê w nieco inny sposób. Jak zapewne pamiêtasz konstrukcja "*nazwa", gdzie nazwa jest wskaŸnikiem powoduje, ¿e w efekcie otrzymujemy wartoœæ, na któr¹ wskazuje nasz wskaŸnik. W tym przypadku w³aœnie to wykorzystaliœmy - u¿ycie konstrukcji "*wsk" powoduje, ¿e teraz mamy do czynienia z wartoœci¹, na któr¹ wskazuje zmienna wsk (w naszym przypadku jest to struktur¹ CZAS). A poniewa¿ mamy teraz do czynienia ze zwyk³¹ struktur¹ to do pola mo¿emy siê "dobraæ" przy pomocy zwyk³ej kropki. Nale¿y jednak tu pamiêtaæ o tym, aby "*wsk" zawrzeæ w nawiasach poniewa¿ operator * ma mniejszy priorytet od operatora . 
+
+
+
+15.4 Dynamiczny przydzia³ pamiêci 
+
+
+Pamiêtasz tablice, prawda ? Wielkoœæ tablicy musia³a byæ ustalona ju¿ w momencie pisania programu. W przypadku prostych programów nie jest to problemem, ale co zrobiæ, gdy potrzebn¹ wielkoœæ tablicy bêdzie mo¿na okreœliæ dopiero po uruchomieniu programu ? Na przyk³ad dane o pracownikach jakiejœ firmy maj¹ byæ odczytywne z pliku - w takim przypadku, a¿ do momentu otwarcia pliku wielkoœæ ta nie jest znana. Mo¿na co prawda zadeklarowaæ tablicê o wielkoœci du¿o wiêkszej ni¿ to prawdopodobnie bêdzie potrzebne, ale wia¿e siê z tym du¿e marnotrawstwo pamiêci. Poza tym mo¿e okazaæ siê, ¿e w pewnym momencie wielkoœæ ta oraz tak nie bêdzie wystarczaj¹ca. Z pomoc¹ przychodz¹ nam wskaŸniki oraz mo¿liwoœæ, któr¹ udostêpniaj¹ a mianowicie dynamiczny (czyli ju¿ w trakcie pracy programu) przydzia³ pamiêci operacyjnej. Ich zastosowanie do tego celu poka¿emy jak zwykle na przyk³adowym programie. Aby nie wprowadzaæ niepotrzebnego zamieszania zdecydowa³em siê dokonaæ przeróbki programu ju¿ analizowanego (w podpunkcie poœwieconemu tablicom struktur). Omówione zostan¹ tu tylko ró¿nice. A oto program: 
+
+
+
+
+#include &ltstdio.h>
+#include &ltstdlib.h>
+
+typedef struct {
+  int nr_id;
+  float pensja;
+} PRACOWNIK;
+
+void main(void) {
+  int       i;
+  PRACOWNIK *kadra;
+
+  // przydzielamy pamiec na dynamiczna tablice
+  kadra = (PRACOWNIK*) malloc(3 * sizeof(PRACOWNIK));
+
+  // sprawdzenie czy udalo sie zaalokowac pamiec
+  if(kadra != NULL) {
+    printf("Brak pamieci !"); exit(0);
+  }
+
+  // wpisujemy wartosci dla poszczegolnych pracownikow
+  kadra-nr_id = 25803; kadra-pensja = 1299.10;
+  (kadra+1)-nr_id = 25809; (kadra+1)-pensja = 2100;
+  (kadra+2)-nr_id = 7; (kadra+2)-pensja = 1500;
+
+  // wyswietlamy informacje o pracowniku - jego nr id, i pensje
+  for(i=0; i<3; i++)
+    printf("Nr identyfikacyjny: %d\nPensja: %5.2f\n\n",
+           kadra[i].nr_id, kadra[i].pensja);
+
+  // zwalniamy przydzielona pamiec
+  free(kadra);
+}
+
+
+
+
+Pierwsza ró¿nica jest ju¿ przy do³¹czaj¹ plików nag³ówkowych. Oprócz "standardowego" stdio.h do³¹czamy jeszcze stdlib.h . Plik ten zawiera deklaracje nowych funkcji, które u¿yjemy w naszym programie - malloc i free . PrzejdŸmy dalej - mamy tu deklaracjê struktury o nazwie PRACOWNIK, nastêpnie zmiennej i. W nastêpnej linijce natykamy siê na nastêpn¹ ró¿nicê - zamiast trzyelementowej tablicy struktur typu PRACOWNIK deklarujemy tu wskaŸnik na strukturê typu PRACOWNIK. Nastêpna linijka zawiera ju¿ ca³kiem now¹ rzecz - wywo³anie funkcji malloc . Funkcja ta alokuje (przydziela dla programu) pamiêæ operacyjn¹ o wielkoœci podanej przy wywo³aniu (w bajtach). W naszym przypadku ka¿emy przydzieliæ jej pamiêæ o wielkoœci "3 * sizeof(PRACOWNIK)". Jak zapewne pamiêtasz operator sizeof zwraca wielkoœæ w bajtach podanego parametru. Tak wiêc wynika z tego, ¿e kazaliœmy funkcji malloc przydzieliæ tyle pamiêci, aby zmieœci³y siê w niej trzy struktury typu PRACOWNIK. Funkcja ta, w przypadku gdy przydzia³ pamiêci siê powiód³, zwraca adres pierwszego zaalokowanego bajtu pamiêci. Poniewa¿ nasz wskaŸnik o nazwie kadra wskazuje na strukturê PRACOWNIK, a funkcja malloc zwraca wskaŸnik typu void* to musimy jeszcze dokonaæ rzutowania. Rzutowanie wska¿ników robi siê w ten sam sposób jak rzutowanie typów prostych - jedynym wyj¹tkiem jest dodanie gwiazdki za nazw¹ typu. Tak wiêc, aby dokonaæ rzutowania wskaŸnika typu void* na wskaŸnik na strukturê PRACOWNIK musimy dodaæ jeszcze "(PRACOWNIK*)" oraz dopiero teraz mo¿emy przypisaæ ten adres naszej zmiennej. Jak ju¿ do tego doszliœmy to wyjaœniê jeszcze zastosowanie wskaŸnika na void. Jak zapewne pamiêtasz s³owo kluczowe void okreœla brak typu. Nie mo¿na deklarowaæ zmiennych typu void, jedynym dopuszczalnym miejscem, gdzie mo¿na go u¿yæ jest okreœlenie typu, który zwraca funkcja. Natomiast wskaŸnika na void jak najbardziej mo¿na u¿ywaæ oraz na dodatek jest on bardzo przydatny. Mo¿esz wiêc zadeklarowaæ sobie zmienn¹ typu wskaŸnik na void. Bardzo wa¿n¹ zalet¹ tego wskaŸnika jest to, ¿e mo¿esz dokonaæ przypisania na niego dowolnego innego wskaŸnika. Oczywiœcie, z uwagi na to, ¿e typ na który on wskazuje nie jest okreœlony nie mo¿esz dokonywaæ na nim operacji arytmetycznych. Dobrze to taka ma³a dygresja, wróæmy do analizy naszego programu. Otó¿ napisa³em, ¿e funkcja malloc zwraca nam adres przydzielonego bloku pamiêci. Co jednak jest w sytuacji, gdy przydzia³ pamiêci nie jest mo¿liwy np. w sytuacji, gdy próbujemy sobie zaalokowaæ 100 MB pamiêci na komputerze wyposa¿onym w tylko 32 MB (pomijam tu istnienie pamiêci wirtualnej). Otó¿ w takim przypadku zamiast adresu zwrócona zostaje wartoœæ NULL . Jest to specjalnie zadeklarowana wartoœæ mówi¹ca o tym, ¿e wskaŸnik jest pusty (czyli nie wskazuje na ¿adne dane). Dlatego, aby zabezpieczyæ siê przed u¿ywaniem pamiêci, która nie zosta³a nam przydzielona nale¿y zaraz po wywo³aniu tej funkcji sprawdziæ wartoœæ, która zosta³¹ zwrócona. Dokonujemy tego w nastêpnej linijce. W naszym przypadku w sytuacji, gdy przydzia³ pamiêci nie by³ mo¿liwy wypisujemy tylko na ekranie odpowiedni komunikat oraz wychodzimy z programu. Program mo¿emy zakoñczyæ w dowolnym momencie przy u¿yciu funkcji exit . Jedynym jej parametrem jest kod wyjœcia, który zostanie przekazany do systemu operacyjnego. W przypadku, gdy nasz program nie bêdzie u¿ywany w plikach wsadowych nie jest on wa¿ny. Skoro ju¿ uda³o nam siê przydzieliæ pamiêæ oraz jesteœmy tego pewni to musimy wpisaæ do niej jakieœ dane. W naszym programie bêd¹ to dane o pracownikach naszej firmy. Przypisania dokonujemy w taki sposób jak przedstawione to by³o w poprzednich podpunktach. W nastêpnych trzech linijkach programu wyœwietlamy dopiero co wpisane dane. Zauwa¿ tu, ¿e mimo tego, ¿e zmienna kadra jest wskaŸnikiem to uŸywamy jej tu tak samo jakby by³a tablic¹. Wynika to z zale¿noœci miêdzy wskaŸnikami a tablicami przedstawionymi w jednym z poprzednich podpunktów kursu. W ostatniej linijce programu mamy do czynienia z drug¹ wiêksz¹ nowoœci¹ - funkcj¹ free . Funkcja ta zwraca do systemu przydzielona wczeœniej przy pomocy funkcji malloc pamiêæ. Mimo, ¿e w tym przypadku nie musieliœmy tego robiæ bo przy wyjœciu z programu pamiêæ ta zosta³aby automatycznie zwrócona, to jednak do dobrego zwyczaju programistycznego nale¿y zwrócenie wszystkich zaalokowanych zasobów. Pamiêtaj, ¿e po zwolnieniu pamiêci nie mo¿esz ju¿ u¿ywaæ tego obszaru pamiêci ! Teoretycznie mo¿esz go modyfikowaæ (bo ci¹gle masz do niego wskaŸnik), ale nie powienineœ, gdy¿ system operacyjny móg³ przydzieliæ t¹ pamiêæ innemu programowi oraz takie grzebanie po zasobach drugiego programu mo¿e zakoñczyæ tym, ¿e program ten (lub nawet ca³y system) siê zawiesi. W systemach operacyjnych z ochron¹ pamiêci natomist mo¿e to spowodowaæ b³¹d ochrony oraz niekontrolowane wyjœcie z twojego programu z b³êdem. 
+
+
+
+
+2
+
+
